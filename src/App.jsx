@@ -5,6 +5,8 @@ import Tab6MainPage from './pages/Tab6MainPage'
 import { Routes ,Route } from 'react-router-dom'
 import PiebackTabCalculator from './pages/PiebackTabCalculator'
 import Navbar from './components/Navbar'
+import Tab3MainPage from './pages/Tab3MainPage'
+import Tab4MainPage from './pages/Tab4MainPage'
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
       <Route path='/' element={<Tab1MainPage />} />
       <Route path='/tab1form' element={<Tab1FormPage />} />
       <Route path='/businesscard' element={<Tab6MainPage />} />
+      <Route path='/sliceOfTheMarket' element={<Tab3MainPage />} />
+      <Route path='/chargebackRiskAnalysis' element={<Tab4MainPage />} />
       <Route path='/businesscardform/:cardId' element={<Tab6FormPage />} />
       <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
     </Routes>
