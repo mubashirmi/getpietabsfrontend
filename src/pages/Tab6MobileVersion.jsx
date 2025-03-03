@@ -3,19 +3,19 @@ import { BiListUl } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import domtoimage from 'dom-to-image';
 import { TbMailCheck, TbMailPause } from "react-icons/tb";
-import { MdMail } from "react-icons/md";
+// import { MdMail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
-import { IoMdAdd } from "react-icons/io";
-import { FiUser, FiX } from "react-icons/fi";
+// import { IoMdAdd } from "react-icons/io";
+// import { FiUser, FiX } from "react-icons/fi";
 import { RiShieldUserFill } from "react-icons/ri";
 import { GoMail } from "react-icons/go";
-import { BsFacebook } from "react-icons/bs";
+// import { BsFacebook } from "react-icons/bs";
 
 const Tab6MobileVersion = () => {
     const navigate = useNavigate();
     const cardRef = useRef(null);
-    const profileInputRef = useRef(null);
-    const coverInputRef = useRef(null);
+    // const profileInputRef = useRef(null);
+    // const coverInputRef = useRef(null);
     const profileImgRef = useRef(null);
     const coverImgRef = useRef(null);
 

@@ -7,6 +7,7 @@ import PiebackTabCalculator from './pages/PiebackTabCalculator'
 import Navbar from './components/Navbar'
 import Tab3MainPage from './pages/Tab3MainPage'
 import Tab4MainPage from './pages/Tab4MainPage'
+import Tab5MainPage from './pages/Tab5MainPage'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path='/businesscard' element={<Tab6MainPage />} />
       <Route path='/sliceOfTheMarket' element={<Tab3MainPage />} />
       <Route path='/chargebackRiskAnalysis' element={<Tab4MainPage />} />
+      <Route path='/loanFinancialAnalysis' element={<Tab5MainPage />} />
       <Route path='/businesscardform/:cardId' element={<Tab6FormPage />} />
       <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
     </Routes>

@@ -9,6 +9,7 @@ const Navbar = () => {
         <button onClick={()=>navigate('/businesscard')} className='py-2 px-5 text-xl font-medium cursor-pointer rounded-xl text-[#f4f4f4] border-2 border-[#f4f4f4] '>Tab 2(Business Card)</button>      
         <button onClick={()=>navigate('/sliceOfTheMarket')} className='py-2 px-5 text-xl font-medium cursor-pointer rounded-xl text-[#f4f4f4] border-2 border-[#f4f4f4] '>Tab 3(Slice of the Market)</button>      
         <button onClick={()=>navigate('/chargebackRiskAnalysis')} className='py-2 px-5 text-xl font-medium cursor-pointer rounded-xl text-[#f4f4f4] border-2 border-[#f4f4f4] '>Tab 4(Chargeback Risk Analysis)</button>      
+        <button onClick={()=>navigate('/loanFinancialAnalysis')} className='py-2 px-5 text-xl font-medium cursor-pointer rounded-xl text-[#f4f4f4] border-2 border-[#f4f4f4] '>Tab 5(Loan Financial Analysis)</button>      
         <button onClick={()=>navigate('/piebackcalculator')} className='py-2 px-5 text-xl font-medium cursor-pointer rounded-xl text-[#f4f4f4] border-2 border-[#f4f4f4] '>Tab 6(Calculator)</button>      
     </div>
   )

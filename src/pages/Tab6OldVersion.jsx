@@ -9,7 +9,7 @@ import { GoMail } from "react-icons/go";
 import { BsFacebook } from "react-icons/bs";
 import StepNavigation from "../components/StepNavigation";
 import Modal from "react-modal";
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
 import React from "react";
 import domtoimage from 'dom-to-image';
 Modal.setAppElement("#root");

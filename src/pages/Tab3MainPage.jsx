@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BiListUl } from "react-icons/bi";
 
 const Tab3MainPage = () => {
