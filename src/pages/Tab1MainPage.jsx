@@ -35,14 +35,14 @@ const Tab1MainPage = () => {
 
             {/* QR Code */}
             <div className="transition-transform transform hover:scale-110 duration-500">
-              <QRCode value="https://your-link-here.com" size={160} />
+              <QRCode value="https://getpietabsfrontend.vercel.app/tab1form" size={160} />
             </div>
           </div>
         </div>
       </div>
 
       {/* Schedule a Meeting Button */}
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center my-10">
         <button className="text-2xl bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold py-4 px-12 rounded-lg transform transition-all duration-500 hover:scale-105 hover:bg-gradient-to-l hover:shadow-xl">
           Schedule a Meeting
         </button>
