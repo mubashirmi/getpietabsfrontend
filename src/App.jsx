@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import Tab3MainPage from './pages/Tab3MainPage'
 import Tab4MainPage from './pages/Tab4MainPage'
 import Tab5MainPage from './pages/Tab5MainPage'
+import Tab7MainPage from './pages/Tab7MainPage'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <Route path='/loanFinancialAnalysis' element={<Tab5MainPage />} />
       <Route path='/businesscardform/:cardId' element={<Tab6FormPage />} />
       <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
+      <Route path='/tab7meeting' element={<Tab7MainPage />} />
     </Routes>
     </>
   )
