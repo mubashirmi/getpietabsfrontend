@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Tab5MainPage = () => {
+  const navigate = useNavigate();
+
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     annualIncome: "",
@@ -33,6 +36,7 @@ const Tab5MainPage = () => {
   const handleSubmitStep2 = (e) => {
     e.preventDefault();
     // Process final submission; for example, send formData to an API
+    navigate('/general-info-form/1/loanApplication')
     console.log("Final form data: ", formData);
     // Reset or show a success message if needed
   };

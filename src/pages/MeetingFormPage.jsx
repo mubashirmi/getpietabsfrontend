@@ -1,27 +1,27 @@
 import { BiListUl } from "react-icons/bi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-const Tab6FormPage = () => {
-  const { cardId } = useParams();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [businessName, setBusinessName] = useState('');
-  const [phone, setPhone] = useState('');
+const MeetingFormPage = () => {
+
+    const navigate = useNavigate();
+
+  const { pictureId , tabName } = useParams();
+  const [bizName, setBizName] = useState(''); 
+  const [merchantName, setMerchantName] = useState('');
+  const [bizAddress, setBizAddress] = useState('');
+  const [meetingTime, setMeetingTime] = useState('');
+  const [meetingDate, setMeetingDate] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Simple email validation regex
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate that all fields are filled
-    if (!name || !email || !businessName || !phone) {
+    if (!bizName || !merchantName || !bizAddress || !meetingTime || !meetingDate) {
       Swal.fire({
         icon: "error",
         title: "Validation Error",
@@ -30,19 +30,11 @@ const Tab6FormPage = () => {
       return;
     }
 
-    // Validate email format
-    if (!validateEmail(email)) {
-      Swal.fire({
-        icon: "error",
-        title: "Validation Error",
-        text: "Please enter a valid email address."
-      });
-      return;
-    }
+    navigate(`/tab7form/${tabName}`)
 
     // Prepare payload and set loading state
     setIsLoading(true);
-    const payload = { name, email, businessName, phone, cardId };
+    const payload = { bizName, merchantName, bizAddress, meetingTime, meetingDate, pictureId , tabName };
 
     try {
       // Send POST request to a random API endpoint
@@ -62,14 +54,16 @@ const Tab6FormPage = () => {
       Swal.fire({
         icon: "success",
         title: "Success",
-        text: `Congratulations! Your card has been sent to your email: ${email}`
+        text: `Congratulations! Your details have been submitted successfully.`
       });
 
       // Optionally clear the form
-      setName('');
-      setEmail('');
-      setBusinessName('');
-      setPhone('');
+      setBizName('');
+      setMerchantName('');
+      setBizAddress('');
+      setMeetingTime('');
+      setMeetingDate('');
+      navigate(`/tab7form/${tabName}`)
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -87,59 +81,72 @@ const Tab6FormPage = () => {
         <div className='absolute top-0 translate-y-[-50%] border-2 shadow-lg shadow-blue-100/70 border-blue-200 left-[50%] bg-blue-100/100 translate-x-[-50%] w-[6rem] sm:w-[7rem] h-[6rem] sm:h-[7rem] rounded-full flex justify-center items-center'>
           <BiListUl size={50} sm={65} color="#222" />
         </div>
-        <h3 className="text-xl text-[#333] font-medium text-center my-3">
-          Please enter the below details to get your business card.
+        <h3 className="text-xl text-[#333] font-medium text-center my-4">
+          Please enter the below details to Schedulle your Meeting.
         </h3>
         <form onSubmit={handleSubmit}>
-          {/* Name Field */}
+          {/* bizName Field */}
           <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="name" className="text-xl font-medium text-[#444]">
-              Name
-            </label>
-            <input 
-              type="text" 
-              id="name"
-              value={name} 
-              onChange={(e) => setName(e.target.value)}
-              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
-            />
-          </div>
-          {/* Email Field */}
-          <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="email" className="text-xl font-medium text-[#444]">
-              Email
-            </label>
-            <input 
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
-            />
-          </div>
-          {/* Business Name Field */}
-          <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="businessName" className="text-xl font-medium text-[#444]">
+            <label htmlFor="bizName" className="text-xl font-medium text-[#444]">
               Business Name
             </label>
             <input 
-              type="text"
-              id="businessName"
-              value={businessName}
-              onChange={(e) => setBusinessName(e.target.value)}
+              type="text" 
+              id="bizName"
+              value={bizName} 
+              onChange={(e) => setBizName(e.target.value)}
               className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
             />
           </div>
-          {/* Phone Field */}
+          {/* merchantName Field */}
           <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="phone" className="text-xl font-medium text-[#444]">
-              Phone #
+            <label htmlFor="merchantName" className="text-xl font-medium text-[#444]">
+              Merchant Name
             </label>
             <input 
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              type="text" 
+              id="merchantName"
+              value={merchantName} 
+              onChange={(e) => setMerchantName(e.target.value)}
+              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
+            />
+          </div>
+          {/* bizAddress Field */}
+          <div className="mb-4 flex flex-col gap-1">
+            <label htmlFor="bizAddress" className="text-xl font-medium text-[#444]">
+              Business Address
+            </label>
+            <input 
+              type="text" 
+              id="bizAddress"
+              value={bizAddress} 
+              onChange={(e) => setBizAddress(e.target.value)}
+              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
+            />
+          </div>
+          {/* meetingTime Field */}
+          <div className="mb-4 flex flex-col gap-1">
+            <label htmlFor="meetingTime" className="text-xl font-medium text-[#444]">
+              Meeting Time
+            </label>
+            <input 
+              type="time" 
+              id="meetingTime"
+              value={meetingTime} 
+              onChange={(e) => setMeetingTime(e.target.value)}
+              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
+            />
+          </div>
+          {/* meetingDate Field */}
+          <div className="mb-4 flex flex-col gap-1">
+            <label htmlFor="meetingDate" className="text-xl font-medium text-[#444]">
+              Meeting Date
+            </label>
+            <input 
+              type="date" 
+              id="meetingDate"
+              value={meetingDate} 
+              onChange={(e) => setMeetingDate(e.target.value)}
               className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
             />
           </div>
@@ -172,7 +179,7 @@ const Tab6FormPage = () => {
                   ></path>
                 </svg>
               ) : (
-                "Submit & Receive Your Card"
+                  "Submit & Schedulle a Meeting"          
               )}
             </button>
           </div>
@@ -182,4 +189,4 @@ const Tab6FormPage = () => {
   );
 };
 
-export default Tab6FormPage;
+export default MeetingFormPage;

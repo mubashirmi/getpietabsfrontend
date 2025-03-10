@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { BiListUl } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const Tab3MainPage = () => {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -86,6 +90,7 @@ const Tab3MainPage = () => {
     }
     setErrors({});
     setIsLoading(true);
+    navigate('/general-info-form/1/sliceOfTheMarket')
     try {
       // Prepare form data payload
       const formPayload = new FormData();
@@ -134,7 +139,7 @@ const Tab3MainPage = () => {
           <BiListUl size={55} color="#222" />
         </div>
         <h3 className="text-xl text-[#333] font-medium text-center my-3">
-          Please enter the below details to get your Flyer
+          Please enter the below details 
         </h3>
         <form onSubmit={handleSubmit}>
           {/* Existing Fields */}
@@ -368,7 +373,7 @@ const Tab3MainPage = () => {
               className="rounded-lg sm:rounded-xl text-base sm:text-xl mb-0.5 mt-4 shadow-lg shadow-black/15 text-white transition-all duration-300 cursor-pointer font-medium py-1.5 sm:py-2.5 px-4 sm:px-7 bg-blue-700/80 hover:bg-blue-700"
               disabled={isLoading}
             >
-              {isLoading ? "Sending..." : "Submit & Get Your Flyer"}
+              {isLoading ? "Sending..." : "Submit"}
             </button>
           </div>
         </form>

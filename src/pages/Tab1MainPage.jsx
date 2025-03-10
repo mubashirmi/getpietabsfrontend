@@ -29,13 +29,13 @@ const Tab1MainPage = () => {
           {/* Buttons & QR Code */}
           <div className="flex flex-col items-center gap-6">
             {/* 'Get Offer By Email' Button */}
-            <button onClick={()=> navigate('/tab1form')} className="w-full cursor-pointer max-w-md text-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg py-4 px-8 transform transition-all duration-500 hover:shadow-lg hover:scale-105 hover:bg-gradient-to-l">
+            <button onClick={()=> navigate('/general-info-form/1/flyer')} className="w-full cursor-pointer max-w-md text-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg py-4 px-8 transform transition-all duration-500 hover:shadow-lg hover:scale-105 hover:bg-gradient-to-l">
               Get Offer By Email
             </button>
 
             {/* QR Code */}
             <div className="transition-transform transform hover:scale-110 duration-500">
-              <QRCode value="https://getpietabsfrontend.vercel.app/tab1form" size={160} />
+              <QRCode value="https://getpietabsfrontend.vercel.app/general-info-form/1/flyer" size={160} />
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ const Tab1MainPage = () => {
 
       {/* Schedule a Meeting Button */}
       <div className="flex justify-center my-10">
-        <button className="text-2xl bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold py-4 px-12 rounded-lg transform transition-all duration-500 hover:scale-105 hover:bg-gradient-to-l hover:shadow-xl">
+        <button onClick={()=> navigate('/schedule-a-meeting/1/flyer')} className="text-2xl bg-gradient-to-r cursor-pointer from-green-600 to-green-800 text-white font-semibold py-4 px-12 rounded-lg transform transition-all duration-500 hover:scale-105 hover:bg-gradient-to-l hover:shadow-xl">
           Schedule a Meeting
         </button>
       </div>

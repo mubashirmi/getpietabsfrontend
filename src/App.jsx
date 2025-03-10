@@ -1,6 +1,5 @@
 import Tab1MainPage from './pages/Tab1MainPage'
-import Tab1FormPage from './pages/Tab1FormPage'
-import Tab6FormPage from './pages/Tab6FormPage'
+import LeadFormPage from './pages/LeadFormPage'
 import Tab6MainPage from './pages/Tab6MainPage'
 import { Routes ,Route } from 'react-router-dom'
 import PiebackTabCalculator from './pages/PiebackTabCalculator'
@@ -9,6 +8,9 @@ import Tab3MainPage from './pages/Tab3MainPage'
 import Tab4MainPage from './pages/Tab4MainPage'
 import Tab5MainPage from './pages/Tab5MainPage'
 import Tab7MainPage from './pages/Tab7MainPage'
+import MeetingFormPage from './pages/MeetingFormPage'
+import PreviewBusinessCard from './pages/PreviewBusinessCard'
+import Tab8MainPage from './pages/Tab8MainPage'
 
 const App = () => {
   return (
@@ -16,14 +18,16 @@ const App = () => {
     <Navbar />
     <Routes>
       <Route path='/' element={<Tab1MainPage />} />
-      <Route path='/tab1form' element={<Tab1FormPage />} />
       <Route path='/businesscard' element={<Tab6MainPage />} />
       <Route path='/sliceOfTheMarket' element={<Tab3MainPage />} />
       <Route path='/chargebackRiskAnalysis' element={<Tab4MainPage />} />
       <Route path='/loanFinancialAnalysis' element={<Tab5MainPage />} />
-      <Route path='/businesscardform/:cardId' element={<Tab6FormPage />} />
+      <Route path='/general-info-form/:pictureId/:tabName' element={<LeadFormPage />} />
+      <Route path='/schedule-a-meeting/:pictureId/:tabName' element={<MeetingFormPage />} />
+      <Route path='/preview-business-card/:cardId' element={<PreviewBusinessCard />} />
       <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
-      <Route path='/tab7meeting' element={<Tab7MainPage />} />
+      <Route path='/tab7form/:tabName' element={<Tab7MainPage />} />
+      <Route path='/pie-proshop' element={<Tab8MainPage />} />
     </Routes>
     </>
   )

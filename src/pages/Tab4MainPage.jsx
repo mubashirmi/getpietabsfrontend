@@ -12,8 +12,11 @@ import {
   Button,
   Box
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Tab4MainPage = () => {
+  const navigate = useNavigate();
+
   // State for form fields (each yes/no question stored as a string "yes" or "no")
   const [formData, setFormData] = useState({
     refundPolicy: '',
@@ -45,7 +48,7 @@ const Tab4MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    navigate('/general-info-form/1/chargebackRiskAssesment')
     // Count yes responses from all yes/no toggle fields
     const yesKeys = [
       'refundPolicyYes',

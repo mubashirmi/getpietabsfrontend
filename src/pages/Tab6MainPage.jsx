@@ -142,13 +142,11 @@ const Tab6MainPage = () => {
       const blob = await response.blob();
       const formData = new FormData();
       formData.append('image', blob, 'business_card.png');
-  
+      navigate('/preview-business-card/3232');
       await fetch('http://localhost:4000/api/tab6', {
         method: 'POST',
         body: formData,
-      });
-  
-      navigate('/businesscardform/89787980');
+      });  
     } catch (error) {
       console.error('Error capturing and sending image:', error);
     }

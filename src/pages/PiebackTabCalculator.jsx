@@ -108,25 +108,26 @@ const PiebackTabCalculator = () => {
         setIsYearly(e.target.value === "Yearly");
     };
 
-    const handleCreateBusinessCard = async () => {
-        try {
-          const element = calculatorRef.current;
-          if (!element) return;
-      
-          const dataUrl = await domtoimage.toPng(element);
-      
-          // Create a temporary link element to trigger the download
-          const link = document.createElement('a');
-          link.href = dataUrl;
-          link.download = 'business_card.png'; // The file name for the download
-          document.body.appendChild(link);
-          link.click(); // Simulate a click to trigger the download
-          document.body.removeChild(link); // Remove the link element after the download
-      
-        } catch (error) {
-          console.error('Error capturing and downloading image:', error);
-        }
-      };
+  const handleCreateBusinessCard = async () => {
+    try {
+      const element = calculatorRef.current;
+      if (!element) return;
+  
+      const dataUrl = await domtoimage.toPng(element);
+      const response = await fetch(dataUrl);
+      const blob = await response.blob();
+      const formData = new FormData();
+      formData.append('image', blob, 'business_card.png');
+      navigate(`/general-info-form/${"1"}/piebackCalculator`);
+
+      await fetch('http://localhost:4000/api/tab6', {
+        method: 'POST',
+        body: formData,
+      });  
+    } catch (error) {
+      console.error('Error capturing and sending image:', error);
+    }
+  };
       
 
     return (
@@ -298,10 +299,9 @@ const PiebackTabCalculator = () => {
                 </div>
             </div>
             <div className="mt-8 flex gap-3 justify-center">
-                <button onClick={()=> navigate('/tab1form')} className="flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><LuPhoneCall color="#f4f4f4" size={19} /></div><span className="text-lg text-[#f4f4f4] font-medium">SCHEDULE AN APPOINTMENT</span></button>
-                <button onClick={()=> navigate('/tab1form')} className="flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><FaLocationArrow color="#f4f4f4" size={20} /></div><span className="text-lg text-[#f4f4f4] font-medium">APPLY NOW</span></button>
-                <button onClick={()=> navigate('/tab1form')} className="flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><IoArrowRedoCircleOutline color="#f4f4f4" size={24} /></div><span className="text-lg text-[#f4f4f4] font-medium">GET THIS ANALYSIS QR + LINK </span></button>
-                <button onClick={handleCreateBusinessCard} className="flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><MdOutlineFileDownload color="#f4f4f4" size={23} /></div><span className="text-lg text-[#f4f4f4] font-medium">DOWNLOAD THIS ANALYSIS</span></button>
+                <button onClick={()=> navigate(`/schedule-a-meeting/${"wsw"}/piebackCalculator`)} className="cursor-pointer flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><LuPhoneCall color="#f4f4f4" size={19} /></div><span className="text-lg text-[#f4f4f4] font-medium">SCHEDULE AN APPOINTMENT</span></button>
+                <button onClick={handleCreateBusinessCard} className="cursor-pointer flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><IoArrowRedoCircleOutline color="#f4f4f4" size={24} /></div><span className="text-lg text-[#f4f4f4] font-medium">GET THIS ANALYSIS QR + LINK </span></button>
+                <button onClick={handleCreateBusinessCard} className="cursor-pointer flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><MdOutlineFileDownload color="#f4f4f4" size={23} /></div><span className="text-lg text-[#f4f4f4] font-medium">DOWNLOAD THIS ANALYSIS</span></button>
             </div>
         </div>
     );
