@@ -34,7 +34,7 @@ const Tab8MainPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-blue-600 text-white p-6 text-center">
-        <h1 className="text-3xl font-bold">WELCOME TO THE RATE TRACKER PROSHOP</h1>
+        <h1 className="text-3xl font-bold">WELCOME TO THE PIEPAY PROSHOP</h1>
         <p className="text-lg mt-2">Shop branded apparel and items for the Rate Tracker team | Free standard shipping on all orders over $50</p>
       </header>
 
