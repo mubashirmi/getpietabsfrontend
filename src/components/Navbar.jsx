@@ -10,7 +10,7 @@ const Navbar = () => {
         <button onClick={()=>navigate('/chargebackRiskAnalysis')} className='py-2 px-5 text-lg font-medium cursor-pointer rounded-lg text-[#f4f4f4] border-2 border-[#f4f4f4] '>Chargeback Risk Analysis</button>      
         <button onClick={()=>navigate('/loanFinancialAnalysis')} className='py-2 px-5 text-lg font-medium cursor-pointer rounded-lg text-[#f4f4f4] border-2 border-[#f4f4f4] '>Loan Financial Analysis</button>      
         <button onClick={()=>navigate('/piebackcalculator')} className='py-2 px-5 text-lg font-medium cursor-pointer rounded-lg text-[#f4f4f4] border-2 border-[#f4f4f4] '>Pie back Calculator</button>      
-        <button onClick={()=>navigate('/tab7meeting')} className='py-2 px-5 text-lg font-medium cursor-pointer rounded-lg text-[#f4f4f4] border-2 border-[#f4f4f4] '>Schedulle a Meeting</button>      
+        <button onClick={()=>navigate('/tab7form/tab7')} className='py-2 px-5 text-lg font-medium cursor-pointer rounded-lg text-[#f4f4f4] border-2 border-[#f4f4f4] '>Schedulle a Meeting</button>      
         <button onClick={()=>navigate('/pie-proshop')} className='py-2 px-5 text-lg font-medium cursor-pointer rounded-lg text-[#f4f4f4] border-2 border-[#f4f4f4] '>Pie ProShop</button>      
     </div>
   )
