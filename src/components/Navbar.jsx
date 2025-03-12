@@ -10,10 +10,10 @@ const Navbar = () => {
         <button onClick={()=>navigate('/')} className=' cursor-pointer rounded-lg '>Flyer</button>      
         <button onClick={()=>navigate('/businesscard')} className=' cursor-pointer rounded-lg '>Business Card</button>      
         <button onClick={()=>navigate('/sliceOfTheMarket')} className=' cursor-pointer rounded-lg '>Slice of the Market</button>      
-        <button onClick={()=>navigate('/chargebackRiskAnalysis')} className=' cursor-pointer rounded-lg '>Chargeback Risk Analysis</button>      
+        <button onClick={()=>navigate('/chargebackRiskAnalysis')} className=' cursor-pointer rounded-lg '>Charge Back Risk Analysis</button>      
         <button onClick={()=>navigate('/loanFinancialAnalysis')} className=' cursor-pointer rounded-lg '>Loan Financial Analysis</button>      
-        <button onClick={()=>navigate('/piebackcalculator')} className=' cursor-pointer rounded-lg '>Pie back Calculator</button>      
-        <button onClick={()=>navigate('/tab7form/tab7')} className=' cursor-pointer rounded-lg '>Schedulle a Meeting</button>      
+        <button onClick={()=>navigate('/piebackcalculator')} className=' cursor-pointer rounded-lg '>PieBack Calculator</button>      
+        <button onClick={()=>navigate('/tab7form/tab7')} className=' cursor-pointer rounded-lg '>Schedule a Meeting</button>      
         <button onClick={()=>navigate('/pie-proshop')} className=' cursor-pointer rounded-lg '>Pie ProShop</button>      
     </div>
   )

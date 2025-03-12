@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Tab1MainPage = () => {
   const navigate = useNavigate(); 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-r from-indigo-200 via-blue-300 to-teal-400 pt-10">
+    <div className="w-full min-h-screen ">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row justify-between gap-10 p-5">
         
         {/* Left Section - Image */}
