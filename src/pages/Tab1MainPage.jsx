@@ -21,7 +21,7 @@ const Tab1MainPage = () => {
   return (
     <div className="w-[97%] min-h-screen max-w-[1440px] mx-auto">
       <div className=" mx-auto flex flex-col lg:flex-row justify-between gap-10 px-5">
-        <div className='absolute w-[39vw] bg-blue-500 left-0 -z-20 h-[860px]' />
+        <div className='absolute w-[39vw] bg-[#0071E3] left-0 -z-20 h-[860px]' />
         {/* Left Section - Image */}
         <div className="w-full lg:w-[45%] flex justify-end items-center h-[700px] my-[80px]">
           <img
@@ -38,7 +38,7 @@ const Tab1MainPage = () => {
           </h2>
           <p className='font-medium text-2xl '>Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.</p>
           <div className='flex gap-x-3'>
-            <button className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get More Info</button>
+            <button onClick={() => navigate("/general-info-form/1/flyer")} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get More Info</button>
             <button onClick={openModal} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
           </div>
 
@@ -59,7 +59,7 @@ const Tab1MainPage = () => {
         <p className='font-medium text-[24px] text-center'>
           Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.
         </p>
-        <button className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
+        <button onClick={() => navigate("/general-info-form/1/flyer")} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
       </div>
 
       {/* Modal */}

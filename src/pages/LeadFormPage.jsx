@@ -1,4 +1,3 @@
-import { BiListUl } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -7,7 +6,7 @@ const LeadFormPage = () => {
 
   const navigate = useNavigate();
 
-  const { pictureId , tabName } = useParams();
+  const { pictureId, tabName } = useParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [businessName, setBusinessName] = useState('');
@@ -47,7 +46,7 @@ const LeadFormPage = () => {
 
     // Prepare payload and set loading state
     setIsLoading(true);
-    const payload = { name, email, businessName, phone, pictureId , tabName };
+    const payload = { name, email, businessName, phone, pictureId, tabName };
 
     try {
       // Send POST request to a random API endpoint
@@ -88,109 +87,78 @@ const LeadFormPage = () => {
   };
 
   return (
-    <div className='min-h-screen flex justify-center items-center bg-blue-200 w-full'>
-      <div className='min-w-full sm:min-w-2xl border-blue-400/60 border-2 bg-slate-50 rounded-4xl relative shadow-xl pt-16 pb-9 px-6 sm:px-10 shadow-black/15'>
-        <div className='absolute top-0 translate-y-[-50%] border-2 shadow-lg shadow-blue-100/70 border-blue-200 left-[50%] bg-blue-100/100 translate-x-[-50%] w-[6rem] sm:w-[7rem] h-[6rem] sm:h-[7rem] rounded-full flex justify-center items-center'>
-          <BiListUl size={50} sm={65} color="#222" />
+    <div className='min-h-[95vh] flex justify-center items-center'>
+      <div className='min-w-full sm:min-w-[1260px] rounded-4xl flex shadow-2xl h-full shadow-black/15 border-[1px] border-[#f4f4f4] '>
+        <div className="w-[35%] bg-[#0071E3] min-h-full rounded-tl-4xl rounded-bl-4xl flex justify-center items-center">
+          <img src={tabName==="flyer"?"/flyerformimage.png":"flyerformimage.png"} alt="form description image" className="w-[70%] object-contain" />
         </div>
-        <h3 className="text-xl text-[#333] font-medium text-center my-3">
-        { 
-          tabName === "flyer"? "Please enter the below details to get your Flyer.":          
-          tabName === "businessCard"? "Please enter the below details to get your business card.":          
-          tabName === "piebackCalculator"? "Please enter the below details to get your Analysis.":
-          "Please enter the below details to get your business card."          
-        }
-        </h3>
-        <form onSubmit={handleSubmit}>
-          {/* Name Field */}
-          <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="name" className="text-xl font-medium text-[#444]">
-              Name
-            </label>
-            <input 
-              type="text" 
-              id="name"
-              value={name} 
-              onChange={(e) => setName(e.target.value)}
-              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
-            />
-          </div>
-          {/* Email Field */}
-          <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="email" className="text-xl font-medium text-[#444]">
-              Email
-            </label>
-            <input 
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
-            />
-          </div>
-          {/* Business Name Field */}
-          <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="businessName" className="text-xl font-medium text-[#444]">
-              Business Name
-            </label>
-            <input 
-              type="text"
-              id="businessName"
-              value={businessName}
-              onChange={(e) => setBusinessName(e.target.value)}
-              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
-            />
-          </div>
-          {/* Phone Field */}
-          <div className="mb-4 flex flex-col gap-1">
-            <label htmlFor="phone" className="text-xl font-medium text-[#444]">
-              Phone #
-            </label>
-            <input 
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="text-lg border-2 font-medium border-slate-400 text-[#333] outline-none rounded-lg py-2.5 px-3"
-            />
-          </div>
-          {/* Submit Button with Loader */}
-          <div className="w-full flex justify-center">
-            <button 
-              type="submit" 
-              disabled={isLoading}
-              className="rounded-xl text-xl mb-0.5 mt-4 shadow-lg shadow-black/15 text-white transition-all duration-300 cursor-pointer font-medium py-2.5 px-7 bg-blue-700/80 hover:bg-blue-700 flex items-center justify-center"
-            >
-              {isLoading ? (
-                <svg 
-                  className="animate-spin h-5 w-5 text-white" 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  fill="none" 
-                  viewBox="0 0 24 24"
-                >
-                  <circle 
-                    className="opacity-25" 
-                    cx="12" 
-                    cy="12" 
-                    r="10" 
-                    stroke="currentColor" 
-                    strokeWidth="4"
-                  ></circle>
-                  <path 
-                    className="opacity-75" 
-                    fill="currentColor" 
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                  ></path>
-                </svg>
-              ) : (
-                  tabName === "flyer"? "Submit & Get Your Flyer":          
-                  tabName === "businessCard"? "Submit & Get Your Business Card":          
-                  tabName === "piebackCalculator"? "Submit & Get Your Analysis":
-                  "Submit & Get Your Flyer"          
-              )}
+        <div className="w-[65%] p-10 h-full">
+          <h3 className="text-4xl text-[#1E1E1E] font-semibold text-center mb-3 tracking-wide">
+            GET MORE INFO
+          </h3>
+          <form onSubmit={handleSubmit}>
+            {/* Name Field */}
+            <div className="mb-4 flex flex-col gap-1">
+              <label htmlFor="name" className="text-base font-light">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
+              />
+            </div>
+            {/* Email Field */}
+            <div className="mb-4 flex flex-col gap-1">
+              <label htmlFor="email" className="text-base font-light">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
+              />
+            </div>
+            {/* Business Name Field */}
+            <div className="mb-4 flex flex-col gap-1">
+              <label htmlFor="businessName" className="text-base font-light">
+                Business Name
+              </label>
+              <input
+                type="text"
+                id="businessName"
+                value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)}
+                className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
+              />
+            </div>
+            {/* Phone Field */}
+            <div className="mb-4 flex flex-col gap-1">
+              <label htmlFor="phone" className="text-base font-light">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
+              />
+            </div>
+            <button type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
+              {
+                tabName === "flyer" ? "Get Flyer" :
+                  tabName === "businessCard" ? "Submit & Get Your Business Card" :
+                    tabName === "piebackCalculator" ? "Submit & Get Your Analysis" :
+                      "Submit & Get Your Flyer"
+              }
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );
