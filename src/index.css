@@ -5,6 +5,17 @@
 body{
   font-family: "Poppins", sans-serif;
 }
+
+
+.gradient-text {
+  background: linear-gradient(to right, black, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  color: transparent;
+}
+
 /* From Uiverse.io by ilkhoeri */ 
 .button {
     --h-button: 48px;
