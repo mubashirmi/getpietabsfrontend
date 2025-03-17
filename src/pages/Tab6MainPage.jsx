@@ -153,7 +153,7 @@ const Tab6MainPage = () => {
 
   return (
     <>
-      <div className="min-h-[100vh] w-full max-w-[1440px] mx-auto lg:block hidden">
+      <div className="min-h-[calc(100vh-72px)] w-full max-w-[1440px] mx-auto lg:block hidden">
         <div className="flex w-full" style={{ maxHeight: "100vh" }}>
         <div className="bg-[#007AFF] opacity-95 h-[calc(100vh-72px)] w-[50vw] left-0 absolute" />
 
@@ -315,7 +315,7 @@ const Tab6MainPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="font-medium text-[20px] text-white text-center py-2.5 rounded-bl-[9px] rounded-br-[9px] bg-gradient-to-r from-[#002F5F] to-[#0071E3]">
+                <div className="font-medium text-[20px] text-white text-center py-2.5 rounded-bl-[9px] rounded-br-[8px] bg-gradient-to-r from-[#002F5F] to-[#0071E3]">
                   GET YOUR PIECE
                 </div>
               </div>
