@@ -21,12 +21,12 @@ const Tab1MainPage = () => {
   return (
     <div className="w-[97%] min-h-screen max-w-[1440px] mx-auto">
       <div className=" mx-auto flex flex-col lg:flex-row justify-between gap-10 px-5">
-        <div className='absolute w-[39vw] bg-[#0071E3] left-0 -z-20 h-[860px]' />
+        <div className='absolute w-[38vw] 2xl:w-[41vw] bg-[#0071E3] opacity-90 left-0 -z-20 h-[860px]' />
         {/* Left Section - Image */}
         <div className="w-full lg:w-[45%] flex justify-end items-center h-[700px] my-[80px]">
           <img
             className="w-fit h-full object-contain hover:scale-110 transition-transform duration-700 ease-in-out rounded-[20px] shadow-xl shadow-black/15"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1JRjDFEpRwo8NiNCTPbl8nsVZmNll0J3f6g&s"
+            src="piepayflyer.png"
             alt="Flyer Image"
           />
         </div>

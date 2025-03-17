@@ -87,14 +87,25 @@ const LeadFormPage = () => {
   };
 
   return (
-    <div className='min-h-[95vh] flex justify-center items-center'>
-      <div className='min-w-full sm:min-w-[1260px] rounded-4xl flex shadow-2xl h-full shadow-black/15 border-[1px] border-[#f4f4f4] '>
-        <div className="w-[35%] bg-[#0071E3] min-h-full rounded-tl-4xl rounded-bl-4xl flex justify-center items-center">
-          <img src={tabName==="flyer"?"/flyerformimage.png":"flyerformimage.png"} alt="form description image" className="w-[70%] object-contain" />
+    <div className='min-h-[calc(100vh-72px)] flex justify-center items-center'>
+      <div className='w-[1440px] py-28 px-12 rounded-4xl gap-x-10 flex shadow-2xl h-full bg-gradient-to-r from-[#0071E3] to-[#002F5F] shadow-black/15 border-[1px] border-[#f4f4f4] '>
+        <div className="w-[50%] min-h-full flex flex-col justify-center items-center">
+          <h2 className="text-[32px] font-bold text-white">WELCOME TO</h2>
+          <div className="flex my-4 justify-center items-center w-full">
+            <img src="/public/Logo.png" alt="logo getpie.io" className="w-[175px]" />
+
+          </div>
+          <h2 className="text-[32px] font-bold text-white mb-4">GETPIE.IO</h2>
+          <p className="text-center text-white font-medium text-2xl">Lorem . Esse illum ut veniam amet, quasi nisissimos. Soluta aut laborum repellat velit! Cum, voluptates mollitia facere obcaecati neque repellendus molestias ipsam ex eos, possimus reprehenderit optio provident! Recusandae quae distinctio odit magnam tempora, quibusdam et.</p>
         </div>
-        <div className="w-[65%] p-10 h-full">
-          <h3 className="text-4xl text-[#1E1E1E] font-semibold text-center mb-3 tracking-wide">
-            GET MORE INFO
+        <div className="w-[50%] bg-white px-10 py-12 h-full rounded-[25px] shadow-2xl shadow-black/10">
+          <h3 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wide">
+          {
+                tabName === "flyer" ? "get more info" :
+                  tabName === "businessCard" ? "Get Your Card" :
+                    tabName === "piebackCalculator" ? "Submit & Get Your Analysis" :
+                      "Submit & Get Your Flyer"
+              }
           </h3>
           <form onSubmit={handleSubmit}>
             {/* Name Field */}
@@ -152,7 +163,7 @@ const LeadFormPage = () => {
             <button type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
               {
                 tabName === "flyer" ? "Get Flyer" :
-                  tabName === "businessCard" ? "Submit & Get Your Business Card" :
+                  tabName === "businessCard" ? "Get Your Business Card" :
                     tabName === "piebackCalculator" ? "Submit & Get Your Analysis" :
                       "Submit & Get Your Flyer"
               }
