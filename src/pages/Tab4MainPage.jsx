@@ -96,12 +96,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Are these clearly stated and easily accessible to customers? Do you have full policies in place posted where customers can access them?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="refundPolicyYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="refundPolicyYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="refundPolicyYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="refundPolicyYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
           <textarea
@@ -120,12 +120,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Do you keep detailed documentation, including order details, communications, and proof of delivery?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="trackRecordsYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="trackRecordsYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="trackRecordsYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="trackRecordsYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
           <textarea
@@ -144,12 +144,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Do you utilize tools like address verification, CVV codes, or 3D Secure for online payments?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="verifyAuthenticityYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="verifyAuthenticityYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="verifyAuthenticityYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="verifyAuthenticityYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
           <textarea
@@ -167,12 +167,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Does your billing descriptor match what customers will expect to see on their credit card statements?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="recognizableNameYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="recognizableNameYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="recognizableNameYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="recognizableNameYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
         </div>
@@ -183,12 +183,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Do you have automated systems or manual checks in place to flag high-risk orders?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="fraudDetectionYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="fraudDetectionYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="fraudDetectionYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="fraudDetectionYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
           <textarea
@@ -207,12 +207,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Do you offer prompt resolutions, such as refunds or exchanges, before issues escalate into chargebacks?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="complaintsProcessYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="complaintsProcessYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="complaintsProcessYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="complaintsProcessYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
           <textarea
@@ -231,12 +231,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Is the customer sent tracking numbers, and can you provide proof of delivery in case of disputes?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="trackingInfoYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="trackingInfoYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="trackingInfoYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="trackingInfoYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
         </div>
@@ -247,12 +247,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Can customers easily reach you through phone, email, or live chat if they have concerns about their order?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="customerSupportYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="customerSupportYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="customerSupportYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="customerSupportYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
           <textarea
@@ -271,12 +271,12 @@ const Tab4MainPage = () => {
           <p className="text-sm font-light">Are you using services that help detect and prevent fraudulent transactions and assist in handling disputes?</p>
           <div className="flex mt-4">
             <label className="inline-flex items-center mr-6">
-              <input type="radio" name="paymentProcessorYes" value="yes" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">Yes</span>
+              <input type="radio" name="paymentProcessorYes" value="yes" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">Yes</span>
             </label>
             <label className="inline-flex items-center">
-              <input type="radio" name="paymentProcessorYes" value="no" className="form-radio" onChange={handleChange} />
-              <span className="ml-2 text-sm font-light">No</span>
+              <input type="radio" name="paymentProcessorYes" value="no" className="form-radio w-[18px] h-[18px]" onChange={handleChange} />
+              <span className="ml-[6px] text-sm font-light">No</span>
             </label>
           </div>
         </div>

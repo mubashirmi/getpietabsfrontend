@@ -25,7 +25,7 @@ const Tab1MainPage = () => {
         {/* Left Section - Image */}
         <div className="w-full lg:w-[45%] flex justify-end items-center h-[700px] my-[80px]">
           <img
-            className="w-fit h-full object-contain hover:scale-110 transition-transform duration-700 ease-in-out rounded-[20px] shadow-xl shadow-black/15"
+            className="h-full object-contain hover:scale-110 transition-transform duration-700 ease-in-out rounded-[20px] shadow-xl shadow-black/15"
             src="piepayflyer.png"
             alt="Flyer Image"
           />
