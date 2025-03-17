@@ -94,42 +94,7 @@ const Tab3MainPage = () => {
     setIsLoading(true);
 
     if (step === 3) {
-      try {
-        const formPayload = new FormData();
-        for (const key in formData) {
-          formPayload.append(key, formData[key]);
-        }
-
-        const response = await fetch("/api/send-flyer", {
-          method: "POST",
-          body: formPayload,
-        });
-
-        if (response.ok) {
-          setFormData({
-            name: "",
-            email: "",
-            businessName: "",
-            phone: "",
-            yearsInBusiness: "",
-            marketingNow: "",
-            effectiveMarketing: "",
-            monthlyMarketingBudget: "",
-            targetAudience: "",
-            idealLead: "",
-            customersIncrease: "",
-            primaryProduct: "",
-            frontBusinessPicture: null,
-            businessLogo: null,
-          });
-          navigate("/general-info-form/1/sliceOfTheMarket");
-        } else {
-          alert("Something went wrong. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error sending flyer:", error);
-        alert("Error sending flyer. Please try again.");
-      }
+      navigate("/general-info-form/1/sliceOfTheMarket");
     } else {
       setStep(step + 1);
     }
@@ -137,8 +102,8 @@ const Tab3MainPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#0071E3] to-[#002F5F] w-full px-4 sm:px-8 pt-6 pb-10">
-      <div className="max-w-[1440px] mx-auto w-[99%] flex justify-center items-center gap-8">
+    <div className="min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#0071E3] to-[#002F5F] w-full px-4 sm:px-8 py-10">
+      <div className="max-w-[1440px] mx-auto w-[99%] flex justify-center items-center gap-x-9 ">
         <div className="w-1/2">
           <h3 className="uppercase text-[32px] font-bold text-white mb-2">
             Slice of the market

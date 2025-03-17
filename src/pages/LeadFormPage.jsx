@@ -104,7 +104,7 @@ const LeadFormPage = () => {
                 tabName === "flyer" ? "get more info" :
                   tabName === "businessCard" ? "Get Your Card" :
                     tabName === "piebackCalculator" ? "Submit & Get Your Analysis" :
-                      "Submit & Get Your Flyer"
+                      "Enter below Details"
               }
           </h3>
           <form onSubmit={handleSubmit}>
@@ -165,7 +165,7 @@ const LeadFormPage = () => {
                 tabName === "flyer" ? "Get Flyer" :
                   tabName === "businessCard" ? "Get Your Business Card" :
                     tabName === "piebackCalculator" ? "Submit & Get Your Analysis" :
-                      "Submit & Get Your Flyer"
+                      "Submit"
               }
             </button>
           </form>
