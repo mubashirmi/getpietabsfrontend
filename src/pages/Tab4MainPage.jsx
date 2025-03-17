@@ -1,17 +1,4 @@
 import { useState } from 'react';
-import {
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  TextField,
-  FormControl,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
-  Button,
-  Box
-} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const Tab4MainPage = () => {
@@ -48,7 +35,8 @@ const Tab4MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/general-info-form/1/chargebackRiskAssesment')
+    navigate('/general-info-form/1/chargebackRiskAssesment');
+    
     // Count yes responses from all yes/no toggle fields
     const yesKeys = [
       'refundPolicyYes',
@@ -97,278 +85,232 @@ const Tab4MainPage = () => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 4 }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Chargeback Risk Assessment
-      </Typography>
+    <div className='w-full min-h-[calc(100vh-72px)] bg-gradient-to-r from-[#0071E3] to-[#002F5F]'>
+    <div className="max-w-[750px] w-[99.5%] mx-auto p-4">
+      <h1 className="text-[32px] text-white text-center font-bold mt-7 mb-3 uppercase">Chargeback Risk Assessment</h1>
+      <p className='text-white text-xl font-medium'>Lorem ipsum morbi nisl nisi mauris mattis egestas non est convallis in fames pretium vitae cursus vestibulum urna volutpat suspendisse.</p>
       <form onSubmit={handleSubmit}>
         {/* 1. Refund, Return, and Shipping Policies */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              1. Refund, Return, and Shipping Policies
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Are these clearly stated and easily accessible to customers? Do you have full policies in place posted where customers can access them?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="refundPolicyYes" value={formData.refundPolicyYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-            <TextField
-              name="refundPolicy"
-              label="Describe your policies"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={3}
-              value={formData.refundPolicy}
-              onChange={handleChange}
-              sx={{ mt: 2 }}
-            />
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">1. Refund, Return, and Shipping Policies</h2>
+          <p className="text-sm font-light">Are these clearly stated and easily accessible to customers? Do you have full policies in place posted where customers can access them?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="refundPolicyYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="refundPolicyYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+          <textarea
+            name="refundPolicy"
+            placeholder="Describe your policies"
+            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            rows="3"
+            value={formData.refundPolicy}
+            onChange={handleChange}
+          />
+        </div>
 
         {/* 2. Tracking and Maintaining Records of Transactions */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              2. Tracking and Maintaining Records of Transactions
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Do you keep detailed documentation, including order details, communications, and proof of delivery?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="trackRecordsYes" value={formData.trackRecordsYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-            <TextField
-              name="trackRecords"
-              label="Describe your record keeping process"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={3}
-              value={formData.trackRecords}
-              onChange={handleChange}
-              sx={{ mt: 2 }}
-            />
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">2. Tracking and Maintaining Records of Transactions</h2>
+          <p className="text-sm font-light">Do you keep detailed documentation, including order details, communications, and proof of delivery?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="trackRecordsYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="trackRecordsYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+          <textarea
+            name="trackRecords"
+            placeholder="Describe your record keeping process"
+            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            rows="3"
+            value={formData.trackRecords}
+            onChange={handleChange}
+          />
+        </div>
 
         {/* 3. Verification of Customer Transactions */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              3. Verification of Customer Transactions
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Do you utilize tools like address verification, CVV codes, or 3D Secure for online payments?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="verifyAuthenticityYes" value={formData.verifyAuthenticityYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-            <TextField
-              name="verifyAuthenticity"
-              label="Describe the methods used"
-              variant="outlined"
-              fullWidth
-              value={formData.verifyAuthenticity}
-              onChange={handleChange}
-              sx={{ mt: 2 }}
-            />
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">3. Verification of Customer Transactions</h2>
+          <p className="text-sm font-light">Do you utilize tools like address verification, CVV codes, or 3D Secure for online payments?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="verifyAuthenticityYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="verifyAuthenticityYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+          <textarea
+            name="verifyAuthenticity"
+            placeholder="Describe the methods used"
+            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            value={formData.verifyAuthenticity}
+            onChange={handleChange}
+          />
+        </div>
 
         {/* 4. Recognizable Business Name on Credit Card Statements */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              4. Recognizable Business Name on Credit Card Statements
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Does your billing descriptor match what customers will expect to see on their credit card statements?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="recognizableNameYes" value={formData.recognizableNameYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">4. Recognizable Business Name on Credit Card Statements</h2>
+          <p className="text-sm font-light">Does your billing descriptor match what customers will expect to see on their credit card statements?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="recognizableNameYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="recognizableNameYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+        </div>
 
         {/* 5. Identification of Fraudulent or Suspicious Transactions */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              5. Identification of Fraudulent or Suspicious Transactions
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Do you have automated systems or manual checks in place to flag high-risk orders?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="fraudDetectionYes" value={formData.fraudDetectionYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-            <TextField
-              name="fraudDetection"
-              label="Describe how you identify suspicious transactions (optional)"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={3}
-              value={formData.fraudDetection}
-              onChange={handleChange}
-              sx={{ mt: 2 }}
-            />
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">5. Identification of Fraudulent or Suspicious Transactions</h2>
+          <p className="text-sm font-light">Do you have automated systems or manual checks in place to flag high-risk orders?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="fraudDetectionYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="fraudDetectionYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+          <textarea
+            name="fraudDetection"
+            placeholder="Describe how you identify suspicious transactions (optional)"
+            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            rows="3"
+            value={formData.fraudDetection}
+            onChange={handleChange}
+          />
+        </div>
 
         {/* 6. Handling Customer Complaints or Disputes */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              6. Handling Customer Complaints or Disputes
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Do you offer prompt resolutions, such as refunds or exchanges, before issues escalate into chargebacks?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="complaintsProcessYes" value={formData.complaintsProcessYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-            <TextField
-              name="complaintsProcess"
-              label="Describe your process"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={3}
-              value={formData.complaintsProcess}
-              onChange={handleChange}
-              sx={{ mt: 2 }}
-            />
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">6. Handling Customer Complaints or Disputes</h2>
+          <p className="text-sm font-light">Do you offer prompt resolutions, such as refunds or exchanges, before issues escalate into chargebacks?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="complaintsProcessYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="complaintsProcessYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+          <textarea
+            name="complaintsProcess"
+            placeholder="Describe your process"
+            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            rows="3"
+            value={formData.complaintsProcess}
+            onChange={handleChange}
+          />
+        </div>
 
         {/* 7. Tracking Information and Delivery Confirmations */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              7. Tracking Information and Delivery Confirmations
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Is the customer sent tracking numbers, and can you provide proof of delivery in case of disputes?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="trackingInfoYes" value={formData.trackingInfoYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">7. Tracking Information and Delivery Confirmations</h2>
+          <p className="text-sm font-light">Is the customer sent tracking numbers, and can you provide proof of delivery in case of disputes?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="trackingInfoYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="trackingInfoYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+        </div>
 
         {/* 8. Accessibility of Customer Support */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              8. Accessibility of Customer Support
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Can customers easily reach you through phone, email, or live chat if they have concerns about their order?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="customerSupportYes" value={formData.customerSupportYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-            <TextField
-              name="customerSupport"
-              label="Describe your customer support availability"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={3}
-              value={formData.customerSupport}
-              onChange={handleChange}
-              sx={{ mt: 2 }}
-            />
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">8. Accessibility of Customer Support</h2>
+          <p className="text-sm font-light">Can customers easily reach you through phone, email, or live chat if they have concerns about their order?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="customerSupportYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="customerSupportYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+          <textarea
+            name="customerSupport"
+            placeholder="Describe your customer support availability"
+            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            rows="3"
+            value={formData.customerSupport}
+            onChange={handleChange}
+          />
+        </div>
 
         {/* 9. Payment Processor and Fraud Protection Tools */}
-        <Card variant="outlined" sx={{ my: 2, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6">
-              9. Payment Processor and Fraud Protection Tools
-            </Typography>
-            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-              Are you using services that help detect and prevent fraudulent transactions and assist in handling disputes?
-            </Typography>
-            <FormControl component="fieldset" sx={{ mt: 1 }}>
-              <RadioGroup row name="paymentProcessorYes" value={formData.paymentProcessorYes} onChange={handleChange}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-          </CardContent>
-        </Card>
+        <div className="bg-white p-5 rounded-[10px] shadow-md my-4">
+          <h2 className="text-xl font-medium">9. Payment Processor and Fraud Protection Tools</h2>
+          <p className="text-sm font-light">Are you using services that help detect and prevent fraudulent transactions and assist in handling disputes?</p>
+          <div className="flex mt-4">
+            <label className="inline-flex items-center mr-6">
+              <input type="radio" name="paymentProcessorYes" value="yes" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">Yes</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input type="radio" name="paymentProcessorYes" value="no" className="form-radio" onChange={handleChange} />
+              <span className="ml-2 text-sm font-light">No</span>
+            </label>
+          </div>
+        </div>
 
-        <Box textAlign="center" sx={{ mt: 4 }}>
-          <Button variant="contained" color="primary" type="submit">
-            Submit Assessment
-          </Button>
-        </Box>
+        <div className="text-center mt-6">
+          <button type="submit" className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium">Submit Assessment</button>
+        </div>
       </form>
 
       {result && (
-        <Card variant="outlined" sx={{ my: 4, p: 2, backgroundColor: '#f9f9f9' }}>
-          <CardContent>
-            <Typography variant="h5" gutterBottom>
-              Analysis Result
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              {result.analysisTitle} ({result.yesCount} Yes answer{result.yesCount !== 1 ? 's' : ''})
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              {result.analysisMessage}
-            </Typography>
-            <Box sx={{ mt: 4 }}>
-              <Typography variant="h6">In the meantime:</Typography>
-              <ul>
-                <li>Use Clear and Transparent Policies</li>
-                <li>Maintain Detailed Transaction Records</li>
-                <li>Implement Address Verification Systems (AVS)</li>
-                <li>Require Strong Authentication Methods</li>
-                <li>Use a Clear and Recognizable Billing Descriptor</li>
-                <li>Monitor and Flag Suspicious Transactions</li>
-                <li>Respond Promptly to Customer Complaints</li>
-                <li>Send Tracking Information and Delivery Confirmations</li>
-                <li>Work with Your Payment Processor</li>
-                <li>Offer Customer Support Accessibility</li>
-              </ul>
-              <Typography variant="body2">
-                By taking these precautions, you can reduce the likelihood of chargebacks and protect your business from unnecessary financial losses.
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
+        <div className="bg-gray-100 p-6 rounded-lg shadow-md mt-8">
+          <h3 className="text-2xl font-semibold mb-4">Analysis Result</h3>
+          <p className="text-xl font-medium">{result.analysisTitle} ({result.yesCount} Yes answer{result.yesCount !== 1 ? 's' : ''})</p>
+          <p className="mt-4">{result.analysisMessage}</p>
+          <div className="mt-8">
+            <h4 className="font-semibold text-lg">In the meantime:</h4>
+            <ul className="list-disc pl-6">
+              <li>Use Clear and Transparent Policies</li>
+              <li>Maintain Detailed Transaction Records</li>
+              <li>Implement Address Verification Systems (AVS)</li>
+              <li>Require Strong Authentication Methods</li>
+              <li>Use a Clear and Recognizable Billing Descriptor</li>
+              <li>Monitor and Flag Suspicious Transactions</li>
+              <li>Respond Promptly to Customer Complaints</li>
+              <li>Send Tracking Information and Delivery Confirmations</li>
+              <li>Work with Your Payment Processor</li>
+              <li>Offer Customer Support Accessibility</li>
+            </ul>
+            <p className="text-gray-600 mt-4">By taking these precautions, you can reduce the likelihood of chargebacks and protect your business from unnecessary financial losses.</p>
+          </div>
+        </div>
       )}
-    </Container>
+    </div>
+    </div>
   );
 };
 
