@@ -87,8 +87,8 @@ const LeadFormPage = () => {
   };
 
   return (
-    <div className='min-h-[calc(100vh-72px)] flex justify-center items-center'>
-      <div className='w-[1440px] py-28 px-12 rounded-4xl gap-x-10 flex shadow-2xl h-full bg-gradient-to-r from-[#0071E3] to-[#002F5F] shadow-black/15 border-[1px] border-[#f4f4f4] '>
+    <div className='min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#DBEDFF] to-[#FFFFFF] py-8'>
+      <div className='w-[1440px] py-28 px-12 rounded-4xl gap-x-10 flex shadow-2xl h-full bg-gradient-to-l from-[#002F5F] to-[#0071E3] shadow-black/15 border-[1px] border-[#f4f4f4] '>
         <div className="w-[50%] min-h-full flex flex-col justify-center items-center">
           <h2 className="text-[32px] font-bold text-white">WELCOME TO</h2>
           <div className="flex my-4 justify-center items-center w-full">

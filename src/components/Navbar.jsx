@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className='flex pt-3 pb-4 justify-between  text-black/80 font-medium text-base items-center max-w-[1440px] mx-auto'>
         <div className='w-11'>
-          <img className='' src="/public/Logo.png" alt="Logo" />
+          <img className='' src="/Logo.png" alt="Logo" />
         </div>
         <button onClick={()=>navigate('/')} className=' cursor-pointer rounded-lg '>Flyer</button>      
         <button onClick={()=>navigate('/businesscard')} className=' cursor-pointer rounded-lg '>Business Card</button>      

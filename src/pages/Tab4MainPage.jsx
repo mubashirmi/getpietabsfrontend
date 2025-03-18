@@ -107,7 +107,7 @@ const Tab4MainPage = () => {
           <textarea
             name="refundPolicy"
             placeholder="Describe your policies"
-            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            className="mt-4 w-full p-2.5 border-[1px] border-[#333] rounded-[10px] resize-none text-[#333]"
             rows="3"
             value={formData.refundPolicy}
             onChange={handleChange}
@@ -131,7 +131,7 @@ const Tab4MainPage = () => {
           <textarea
             name="trackRecords"
             placeholder="Describe your record keeping process"
-            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            className="mt-4 w-full p-2.5 border-[1px] border-[#333] rounded-[10px] resize-none text-[#333]"
             rows="3"
             value={formData.trackRecords}
             onChange={handleChange}
@@ -155,7 +155,7 @@ const Tab4MainPage = () => {
           <textarea
             name="verifyAuthenticity"
             placeholder="Describe the methods used"
-            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            className="mt-4 w-full p-2.5 border-[1px] border-[#333] rounded-[10px] resize-none text-[#333]"
             value={formData.verifyAuthenticity}
             onChange={handleChange}
           />
@@ -194,7 +194,7 @@ const Tab4MainPage = () => {
           <textarea
             name="fraudDetection"
             placeholder="Describe how you identify suspicious transactions (optional)"
-            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            className="mt-4 w-full p-2.5 border-[1px] border-[#333] rounded-[10px] resize-none text-[#333]"
             rows="3"
             value={formData.fraudDetection}
             onChange={handleChange}
@@ -218,7 +218,7 @@ const Tab4MainPage = () => {
           <textarea
             name="complaintsProcess"
             placeholder="Describe your process"
-            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            className="mt-4 w-full p-2.5 border-[1px] border-[#333] rounded-[10px] resize-none text-[#333]"
             rows="3"
             value={formData.complaintsProcess}
             onChange={handleChange}
@@ -258,7 +258,7 @@ const Tab4MainPage = () => {
           <textarea
             name="customerSupport"
             placeholder="Describe your customer support availability"
-            className="mt-4 w-full p-3 border rounded-md shadow-sm"
+            className="mt-4 w-full p-2.5 border-[1px] border-[#333] rounded-[10px] resize-none text-[#333]"
             rows="3"
             value={formData.customerSupport}
             onChange={handleChange}

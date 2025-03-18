@@ -2,13 +2,10 @@ import { useState, useRef } from "react";
 import { MdMail } from "react-icons/md";
 import { FaPhone, FaLinkedin } from "react-icons/fa6";
 import { FaGlobe, FaBuilding, FaInstagramSquare, FaFacebookF } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
 import { FiUser, FiX } from "react-icons/fi";
 import { RiShieldUserFill } from "react-icons/ri";
-import { GoMail } from "react-icons/go";
 import { BsFacebook } from "react-icons/bs";
 import Modal from "react-modal";
-import React from "react";
 import domtoimage from 'dom-to-image';
 import { TbMailCheck, TbMailPause } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
@@ -153,9 +150,9 @@ const Tab6MainPage = () => {
 
   return (
     <>
-      <div className="min-h-[calc(100vh-72px)] w-full max-w-[1440px] mx-auto lg:block hidden">
-        <div className="flex w-full" style={{ maxHeight: "100vh" }}>
-        <div className="bg-[#007AFF] opacity-95 h-[calc(100vh-72px)] w-[50vw] left-0 absolute" />
+      <div className="min-h-[calc(100vh-72px)] max-h-[calc(100vh-72px)] w-full max-w-[1440px] mx-auto lg:block hidden">
+        <div className="flex w-full">
+        <div className=" bg-gradient-to-l from-[#002F5F] to-[#0071E3] opacity-95 h-[calc(100vh-72px)] w-[50vw] left-0 absolute" />
 
           {/* Business Card Output */}
           <div
@@ -324,8 +321,8 @@ const Tab6MainPage = () => {
 
           {/* Business Card Data Inputs */}
           <div
-            className="lg:w-[50%] h-[calc(100vh-72px)] lg:px-6 xl:px-12 custom-scrollbar flex flex-col justify-center"
-            style={{ maxHeight: "100vh", overflowY: "auto" }}
+            className="lg:w-[50%] min-h-[calc(100vh-72px)] max-h-[calc(100vh-72px)] lg:px-6 xl:px-12 custom-scrollbar flex flex-col justify-center"
+            style={{ overflowY: "auto" }}
           >
             <h2 className="text-[40px] font-semibold leading-16">Create your <br /><span className="font-extrabold text-[64px] gradient-text2">Business Card</span></h2>
             <p className="ml-1 font-medium text-xl text-[#5F5F5F]">
@@ -383,7 +380,7 @@ const Tab6MainPage = () => {
                     className="flex gap-2.5 w-[49%] px-2.5 py-5 cursor-pointer justify-center items-center transition-all duration-300 border-[1px] border-[#B0C3D6] bg-[#F1F8FF] rounded-[20px]"
                   >
                     <div className="w-[25px] h-[25px]"><img className="w-full h-full" src="pencil-square.png" alt="" /></div>
-                    <p className="text-base text-[#5F5F5F] font-medium">Name</p>
+                    <p className="text-base text-[#5F5F5F] font-medium">{fields.name?.value || "Full name"}</p>
                   </div>
                   <div
                     onClick={() => openModalForField("jobTitle")}
@@ -391,7 +388,7 @@ const Tab6MainPage = () => {
                   >
                     <div className="w-[25px] h-[25px]"><img className="w-full h-full" src="pencil-square.png" alt="" /></div>
 
-                    <p className="text-base text-[#5F5F5F] font-medium">Job Title</p>
+                    <p className="text-base text-[#5F5F5F] font-medium">{fields.jobTitle?.value || "Job Title"}</p>
                   </div>
                 </div>
               </div>
@@ -403,53 +400,21 @@ const Tab6MainPage = () => {
                     className="flex gap-2.5 w-[49%] px-2.5 py-5 cursor-pointer justify-center items-center transition-all duration-300 border-[1px] border-[#B0C3D6] bg-[#F1F8FF] rounded-[20px]"
                   >
                     <div className="w-[25px] h-[25px]"><img className="w-full h-full" src="pencil-square.png" alt="" /></div>
-                    <p className="text-base text-[#5F5F5F] font-medium">Email</p>
+                    <p className="text-base text-[#5F5F5F] font-medium">{fields.email?.value || "Email"}</p>
                   </div>
                   <div
                     onClick={() => openModalForField("phone")}
                     className="flex gap-2.5 w-[49%] px-2.5 py-5 cursor-pointer justify-center items-center transition-all duration-300 border-[1px] border-[#B0C3D6] bg-[#F1F8FF] rounded-[20px]"
                   >
                     <div className="w-[25px] h-[25px]"><img className="w-full h-full" src="pencil-square.png" alt="" /></div>
-                    <p className="text-base text-[#5F5F5F] font-medium">Phone</p>
+                    <p className="text-base text-[#5F5F5F] font-medium">{fields.phone?.value || "Phone"}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="mt-10">
-              <button
-                onClick={handleCreateBusinessCard}
-                type="button"
-                className="button w-64"
-              >
-                <span className="fold"></span>
-                <div className="points_wrapper">
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                  <i className="point"></i>
-                </div>
-                <span className="inner">
-                  <svg
-                    className="icon"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2.5"
-                  >
-                    <polyline points="13.18 1.37 13.18 9.64 21.45 9.64 10.82 22.63 10.82 14.36 2.55 14.36 13.18 1.37"></polyline>
-                  </svg>
-                  Create Business Card
-                </span>
-              </button>
+            <div className="mt-7">
+            <button onClick={handleCreateBusinessCard} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Create Business Card</button>
+
             </div>
           </div>
         </div>
@@ -491,12 +456,12 @@ const Tab6MainPage = () => {
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Value:</label>
+                {/* <label className="block text-sm font-medium text-gray-700">Value:</label> */}
                 {activeField === "jobTitle" ? (
                   <select
                     value={modalFieldData.value}
                     onChange={(e) => handleModalFieldChange("value", e.target.value)}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 bg-white"
+                    className="mt-1 block w-full rounded-md border-gray-500 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 bg-white"
                   >
                     <option value="Accountant">Accounts Executive </option>
                     <option value="Manager">Accounts Manager</option>
@@ -507,7 +472,7 @@ const Tab6MainPage = () => {
                     value={modalFieldData.value}
                     onChange={(e) => handleModalFieldChange("value", e.target.value)}
                     placeholder={`Enter your ${formatFieldName(activeField).toLowerCase()}`}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2"
+                    className="mt-1 block w-full rounded-md border-gray-500 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2"
                   />
                 )}
               </div>
@@ -543,19 +508,14 @@ const Tab6MainPage = () => {
                 </div>
               )} */}
             </div>
-            <div className="mt-8 flex justify-between">
+            <div className="mt-8 flex justify-center">
               <button
                 onClick={handleSaveField}
                 className="bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200"
               >
                 Save
               </button>
-              <button
-                onClick={handleDeleteField}
-                className="bg-red-700 py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer transition-all hover:shadow-blue-800/30 hover:shadow-lg ease-in-out duration-200"
-              >
-                Delete
-              </button>
+              
             </div>
           </div>
         </Modal>
