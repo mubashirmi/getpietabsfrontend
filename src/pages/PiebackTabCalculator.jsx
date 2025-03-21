@@ -131,7 +131,7 @@ const PiebackTabCalculator = () => {
       
 
     return (
-        <div className="min-h-[100vh] bg-blue-200 w-full flex flex-col justify-center items-center pt-20 pb-10">
+        <div className="min-h-[100vh] bg-gradient-to-r from-[#0071E3] to-[#002F5F] w-full flex flex-col justify-center items-center pt-20 pb-10">
             <div className="w-6xl bg-white rounded-4xl border-[3px] border-blue-800/60 px-4 pt-16 pb-10 relative" ref={calculatorRef}>
                 <div className='absolute top-0 bg-blue-100 text-blue-800/80 translate-y-[-50%] left-[50%] translate-x-[-50%] w-[7rem] h-[7rem] flex justify-center items-center rounded-full border-[3px] border-blue-800/60 shadow-lg shadow-blue-100'>
                     <LuCalculator size={50} />
