@@ -32,109 +32,63 @@ const Tab8MainPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-600 text-white p-6 text-center">
-        <h1 className="text-3xl font-bold">WELCOME TO THE PIEPAY PROSHOP</h1>
-        <p className="text-lg mt-2">Shop branded apparel and items for the Rate Tracker team | Free standard shipping on all orders over $50</p>
-      </header>
+    <div className="min-h-[calc(100vh-72px)] bg-white py-7 max-w-[1440px] w-[95%] mx-auto">
+      <div className="mb-5 text-white flex-col py-12 bg-gradient-to-r from-[#4686BC] to-[#62956A] shadow-lg shadow-black/15 flex justify-center items-center rounded-[20px] gap-y-[10px]" >
+        <h2 className="text-[32px] font-bold">Pie Back Calculator</h2>
+        <p className="text-xl font-medium">Shop branded apparel and items for the Rate Tracker team | Free standard shipping on all orders over $50</p>
+      </div>
 
-      <div className="flex max-w-7xl mx-auto my-8">
-        <nav className="w-64 bg-white shadow-lg rounded-lg p-4">
-          <h2 className="text-xl font-semibold text-gray-800">Explore ProShop</h2>
-          <ul className="mt-4 space-y-2">
-            <li>
-              <a
-                href="#"
-                onClick={() => handleCategoryChange("all")}
-                className="block py-2 px-4 text-gray-700 hover:bg-blue-600 hover:text-white rounded"
-              >
-                All Products
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => handleCategoryChange("men")}
-                className="block py-2 px-4 text-gray-700 hover:bg-blue-600 hover:text-white rounded"
-              >
-                Men's Apparel
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => handleCategoryChange("women")}
-                className="block py-2 px-4 text-gray-700 hover:bg-blue-600 hover:text-white rounded"
-              >
-                Women's Apparel
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => handleCategoryChange("bags")}
-                className="block py-2 px-4 text-gray-700 hover:bg-blue-600 hover:text-white rounded"
-              >
-                Bags
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => handleCategoryChange("hats")}
-                className="block py-2 px-4 text-gray-700 hover:bg-blue-600 hover:text-white rounded"
-              >
-                Hats
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => handleCategoryChange("cups")}
-                className="block py-2 px-4 text-gray-700 hover:bg-blue-600 hover:text-white rounded"
-              >
-                Cups
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => handleCategoryChange("blankets")}
-                className="block py-2 px-4 text-gray-700 hover:bg-blue-600 hover:text-white rounded"
-              >
-                Blankets
-              </a>
-            </li>
-          </ul>
-        </nav>
+      <div className="flex mt-8
+      
+      
+      
+      ">
+      {/* Left Sidebar */}
+      <div className="w-[20%] py-4 bg-[#F0F0F0] rounded-[10px]">
+        <h3 className="text-xl font-medium text-center">Explore ProShop</h3>
+        <ul className="mt-5">
+          <li className="cursor-pointer bg-white border-0 border-l-[5px] border-l-[#4686BC] py-2 px-4 text-xl font-medium">All Products</li>
+          <li className="cursor-pointer hover:text-blue-500 py-2 px-4 text-xl font-medium">Men's Apparel</li>
+          <li className="cursor-pointer hover:text-blue-500 py-2 px-4 text-xl font-medium">Women's Apparel</li>
+          <li className="cursor-pointer hover:text-blue-500 py-2 px-4 text-xl font-medium">Bags</li>
+          <li className="cursor-pointer hover:text-blue-500 py-2 px-4 text-xl font-medium">Hats</li>
+          <li className="cursor-pointer hover:text-blue-500 py-2 px-4 text-xl font-medium">Cups</li>
+          <li className="cursor-pointer hover:text-blue-500 py-2 px-4 text-xl font-medium">Blankets</li>
+        </ul>
+      </div>
 
-        <section className="flex-1 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            {selectedCategory === "all" ? "All Products" : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {filteredProducts.map((item) => (
-              <div key={item.id} className="bg-white rounded-lg shadow-md p-4 text-center">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-48 object-cover rounded-t-lg mb-4"
-                />
-                <h3 className="text-xl font-semibold text-gray-800">{item.name}</h3>
-                <button
-                  onClick={() => handleOrder(item)}
-                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-500 focus:outline-none"
-                >
-                  Order
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
+      {/* Main Content */}
+      <div className="w-[80%] px-5">
+        <h2 className="text-2xl font-semibold mb-3 text-center text-[#222]">All Products</h2>
+        <div className="grid grid-cols-3 gap-4">
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+        </div>
+      </div>
+    </div>
+
+
+</div>
+  );
+};
+
+const ProductCard = () => {
+  return (
+    <div className="bg-white border-[1px] border-[#C6C6C6] rounded-[10px] shadow-md overflow-hidden p-2.5 transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-blue-900/30">
+      <div className="h-48 bg-gray-200 rounded-[9px]"></div>
+      <div className="pt-4 pb-2 px-1">
+        <h3 className="text-xl font-medium mb-1">Men's Long Sleeve</h3>
+        <p className="text-base mb-4">$20</p>
+        <button className="w-full py-2 bg-gradient-to-r from-[#4686BC] to-[#62956A] text-white font-medium rounded-[10px] cursor-pointer transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-cyan-700/15">
+          Order
+        </button>
       </div>
     </div>
   );
 };
-
 
 export default Tab8MainPage

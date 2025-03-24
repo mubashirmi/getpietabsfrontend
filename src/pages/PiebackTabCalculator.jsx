@@ -133,7 +133,7 @@ const PiebackTabCalculator = () => {
         <div className="min-h-[100vh] bg-gradient-to-r from-[#4686BC] to-[#62956A] w-full flex flex-col justify-center items-center pt-20 pb-10">
             <div className="w-[1211px] bg-white rounded-[25px] p-[30px] relative" ref={calculatorRef}>
                 <h3 className='text-[32px] font-bold text-center mb-5'> PIE BACK CALCULATOR</h3>
-                <div className='flex justify-between gap-3'> 
+                <div className='flex justify-between gap-3'>
                     <div className='w-[50%] pl-3'>
                         {/* Referral Account Volume */}
                         <div className="flex flex-col space-x-4 mb-3">
@@ -181,7 +181,7 @@ const PiebackTabCalculator = () => {
                             />
                         </div>
                         {/* Total Referral Volume */}
-                        <div className="flex flex-col  space-x-4 mb-20">
+                        <div className="flex flex-col  space-x-4 mb-8">
                             <label
                                 htmlFor="totalReferralVolume"
                                 className="text-xl font-medium"
@@ -262,19 +262,40 @@ const PiebackTabCalculator = () => {
                         </div>
                     </div>
                     <div className='w-[50%] pl-8 pr-4'>
-                        {/* Donut Chart */}
+
                         <div className="flex justify-between mb-4">
                             <label className="text-xl font-medium">Select Period</label>
                             <select
-                                className="bg-slate-50 text-xs ml-2 translate-y-[5px] rounded-lg outline-none border-2 border-blue-300"
+                                className="text-xl font-medium focus:outline-none outline-none border-0 border-b-2 border-gray-500 bg-transparent"
                                 onChange={handleDropdownChange}
                                 value={isYearly ? "Yearly" : "Monthly"}
                             >
                                 <option value="Monthly">Monthly</option>
                                 <option value="Yearly">Yearly</option>
                             </select>
+
                         </div>
-                        
+                        <div>
+                            <div className="mb-5 bg-[#F1F1F1] rounded-[50px]">
+                                <div className="flex gap-x-5 p-[5px] h-full bg-[#4686BC] rounded-[50px] min-w-fit items-center">
+                                    <div className="w-[100px] h-[100px] bg-[#C0C0C0] rounded-full"/>
+                                    <div className={`h-full text-white min-w-fit flex justify-center items-center flex-col`}>
+                                        <h6 className="font-medium">Savings</h6>
+                                        <h6 className="font-medium">{}%</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mb-[80px] bg-[#F1F1F1] rounded-[50px]">
+                                <div className="flex gap-x-5 p-[5px] h-full bg-[#62956A] rounded-[50px] min-w-fit items-center">
+                                    <div className="w-[100px] h-[100px] bg-[#C0C0C0] rounded-full"/>
+                                    <div className={`h-full text-white min-w-fit flex justify-center items-center flex-col`}>
+                                        <h6 className="font-medium">Savings</h6>
+                                        <h6 className="font-medium">{}%</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {/* Savings with Piepay */}
                         <div className="bg-[#4686BC] p-[10px] rounded-[20px] my-5 shadow-lg shadow-blue-100 text-white flex flex-col justify-center items-center">
                             <div className="flex">
