@@ -26,7 +26,7 @@ const App = () => {
       <Route path='/schedule-a-meeting/:pictureId/:tabName' element={<MeetingFormPage />} />
       <Route path='/preview-business-card/:cardId' element={<PreviewBusinessCard />} />
       <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
-      <Route path='/tab7form/:tabName' element={<Tab7MainPage />} />
+      <Route path='/merchant-analysis' element={<Tab7MainPage />} />
       <Route path='/pie-proshop' element={<Tab8MainPage />} />
     </Routes>
     </>

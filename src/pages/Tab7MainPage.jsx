@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axiosInstance from '../api/axiosInstance';
 
 const Tab7MainPage = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,10 @@ const Tab7MainPage = () => {
     profitMargin: '',
     ticketPrice: '',
     foodDelivery: '',
-    costIncreasePlans: ''
+    costIncreasePlans: '',
+    // to be discussed
+    tabName:"Loan-Application"
+    
   });
 
   const handleChange = (e) => {
@@ -24,7 +28,15 @@ const Tab7MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Validate the second form
+    axiosInstance.post('/finalForm', formData)
+    .then((response) => {
+      alert("Form submitted successfully!");
+      // Handle response as needed
+    })
+    .catch((error) => {
+      console.error("Error submitting form: ", error);
+      alert("There was an error submitting the form.");
+    });
     if (
       formData.processor &&
       formData.businessDuration &&
@@ -37,12 +49,12 @@ const Tab7MainPage = () => {
       formData.foodDelivery &&
       formData.costIncreasePlans
     ) {
-      alert("Form submitted successfully!");
-      // Handle final submission here (e.g., send the data to the server)
+      console.log("hj")
     } else {
       alert("Please answer all the questions.");
     }
   };
+  
 
   return (
     <div className="min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#0071E3] to-[#002F5F] w-full px-4 sm:px-8 py-10">

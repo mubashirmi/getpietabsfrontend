@@ -10,6 +10,7 @@ import domtoimage from 'dom-to-image';
 import { TbMailCheck, TbMailPause } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Tab6MobileVersion from "./Tab6MobileVersion";
+import axiosInstance from "../api/axiosInstance";
 
 Modal.setAppElement("#root");
 
@@ -31,11 +32,11 @@ const Tab6MainPage = () => {
   });
 
   const navigate = useNavigate();
+
   const cardRef = useRef(null);
   const profileInputRef = useRef(null);
   const coverInputRef = useRef(null);
   const profileImgRef = useRef(null);
-  const coverImgRef = useRef(null);
 
   const openFileSelector = (type) => {
     if (type === "profile") {
@@ -109,20 +110,6 @@ const Tab6MainPage = () => {
     setModalOpen(false);
   };
 
-  const handleDeleteField = () => {
-    if (["name", "jobTitle", "companyName", "email", "phone", "website"].includes(activeField)) {
-      alert("You cannot delete a default field.");
-      return;
-    }
-    setFields((prev) => {
-      const newFields = { ...prev };
-      delete newFields[activeField];
-      return newFields;
-    });
-    setActiveField(null);
-    setModalOpen(false);
-  };
-
   const handleCloseModal = () => {
     setModalOpen(false);
     setActiveField(null);
@@ -132,17 +119,25 @@ const Tab6MainPage = () => {
     try {
       const element = cardRef.current;
       if (!element) return;
-
+  
       const dataUrl = await domtoimage.toPng(element);
       const response = await fetch(dataUrl);
       const blob = await response.blob();
+  
       const formData = new FormData();
       formData.append('image', blob, 'business_card.png');
-      navigate('/preview-business-card/3232');
-      await fetch('http://localhost:4000/api/tab6', {
-        method: 'POST',
-        body: formData,
-      });
+      
+      // Sending the image to the backend with axiosInstance
+      await axiosInstance.post('/businessCard', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then(response=>{
+        navigate(`/preview-business-card/${response.data.id}`); // Navigate to the preview page after submission
+      }).catch(error=>{
+        console.log("Error",error)
+      })
+  
     } catch (error) {
       console.error('Error capturing and sending image:', error);
     }
@@ -321,7 +316,7 @@ const Tab6MainPage = () => {
 
           {/* Business Card Data Inputs */}
           <div
-            className="lg:w-[50%] min-h-[calc(100vh-72px)] max-h-[calc(100vh-72px)] lg:px-6 xl:px-12 custom-scrollbar flex flex-col justify-center"
+            className="lg:w-[50%] min-h-[calc(100vh-72px)] max-h-[calc(100vh-72px)] lg:pl-6 xl:pl-12 custom-scrollbar flex flex-col justify-center"
             style={{ overflowY: "auto" }}
           >
             <h2 className="text-[40px] font-semibold leading-16">Create your <br /><span className="font-extrabold text-[64px] gradient-text2">Business Card</span></h2>
@@ -370,7 +365,7 @@ const Tab6MainPage = () => {
               </div>
             </div>
             {/* Add Links Section */}
-            <div className="mt-2">
+            <div className="mt-2 w-full">
               <h3 className="text-2xl font-semibold">Add your details</h3>
               <div className="mt-3">
                 <h4 className="text-base font-semibold">Personal</h4>
@@ -412,12 +407,13 @@ const Tab6MainPage = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-7">
-            <button onClick={handleCreateBusinessCard} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Create Business Card</button>
-
-            </div>
+            <div className='flex gap-x-3 mt-10'>
+            <button onClick={handleCreateBusinessCard} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get This Card</button>
+            <button onClick={() => navigate("/schedule-a-meeting/1/businessCard")} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Schedule A Meeting <img className='w-[21px] h-[21px]' src="downnloadbtnicon.png" alt="" /></button>
+          </div>
           </div>
         </div>
+
 
         {/* Enhanced Modal for editing fields */}
         <Modal

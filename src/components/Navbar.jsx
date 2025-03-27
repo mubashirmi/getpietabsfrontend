@@ -13,7 +13,7 @@ const Navbar = () => {
         <button onClick={()=>navigate('/chargebackRiskAnalysis')} className=' cursor-pointer rounded-lg '>Charge Back Risk Analysis</button>      
         <button onClick={()=>navigate('/loanFinancialAnalysis')} className=' cursor-pointer rounded-lg '>Loan Financial Analysis</button>      
         <button onClick={()=>navigate('/piebackcalculator')} className=' cursor-pointer rounded-lg '>PieBack Calculator</button>      
-        <button onClick={()=>navigate('/tab7form/tab7')} className=' cursor-pointer rounded-lg '>Schedule a Meeting</button>      
+        <button onClick={()=>navigate('/merchant-analysis')} className=' cursor-pointer rounded-lg '>Merchant Analysis</button>      
         <button onClick={()=>navigate('/pie-proshop')} className=' cursor-pointer rounded-lg '>Pie ProShop</button>      
     </div>
   )

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance"; // Import your axiosInstance
 
 const Tab3MainPage = () => {
   const navigate = useNavigate();
@@ -94,10 +95,26 @@ const Tab3MainPage = () => {
     setIsLoading(true);
 
     if (step === 3) {
-      navigate("/general-info-form/1/sliceOfTheMarket");
+      try {
+        const formDataToSend = new FormData();
+        Object.keys(formData).forEach((key) => {
+          if (formData[key]) formDataToSend.append(key, formData[key]);
+        });
+
+        await axiosInstance.post("/slice-of-the-market", formDataToSend, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        navigate("/general-info-form/1/sliceOfTheMarket");
+      } catch (error) {
+        console.error("Error submitting data:", error);
+      }
     } else {
       setStep(step + 1);
     }
+
     setIsLoading(false);
   };
 
@@ -109,7 +126,7 @@ const Tab3MainPage = () => {
             Slice of the market
           </h3>
           <p className="text-xl font-semibold text-[#DFDFDF]">
-          Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
+            Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
           </p>
         </div>
         <div className="w-[50%] bg-white px-10 py-12 h-full rounded-[25px] shadow-2xl shadow-black/10">
@@ -132,6 +149,7 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.name && <p className="text-red-500">{errors.name}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="email" className="text-base font-light">
@@ -145,6 +163,7 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.email && <p className="text-red-500">{errors.email}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="businessName" className="text-base font-light">
@@ -158,6 +177,7 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.businessName && <p className="text-red-500">{errors.businessName}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="phone" className="text-base font-light">
@@ -171,6 +191,7 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.phone && <p className="text-red-500">{errors.phone}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="yearsInBusiness" className="text-base font-light">
@@ -184,6 +205,7 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.yearsInBusiness && <p className="text-red-500">{errors.yearsInBusiness}</p>}
                 </div>
               </>
             )}
@@ -193,7 +215,7 @@ const Tab3MainPage = () => {
               <>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="marketingNow" className="text-base font-light">
-                  How are you marketing now?
+                    How are you marketing now?
                   </label>
                   <input
                     type="text"
@@ -203,10 +225,11 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.marketingNow && <p className="text-red-500">{errors.marketingNow}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="effectiveMarketing" className="text-base font-light">
-                  What types of marketing do you find most effective?
+                    What types of marketing do you find most effective?
                   </label>
                   <input
                     type="text"
@@ -216,6 +239,7 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.effectiveMarketing && <p className="text-red-500">{errors.effectiveMarketing}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="monthlyMarketingBudget" className="text-base font-light">
@@ -229,6 +253,7 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.monthlyMarketingBudget && <p className="text-red-500">{errors.monthlyMarketingBudget}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="targetAudience" className="text-base font-light">
@@ -242,6 +267,8 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.targetAudience && <p className="text-red-500">{errors.targetAudience}</p>}
+
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="idealLead" className="text-base font-light">
@@ -255,6 +282,8 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.idealLead && <p className="text-red-500">{errors.idealLead}</p>}
+
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="customersIncrease" className="text-base font-light">
@@ -268,6 +297,8 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.customersIncrease && <p className="text-red-500">{errors.customersIncrease}</p>}
+
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="primaryProduct" className="text-base font-light">
@@ -281,6 +312,8 @@ const Tab3MainPage = () => {
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.primaryProduct && <p className="text-red-500">{errors.primaryProduct}</p>}
+
                 </div>
               </>
             )}
@@ -299,6 +332,7 @@ const Tab3MainPage = () => {
                     onChange={handleFileChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.frontBusinessPicture && <p className="text-red-500">{errors.frontBusinessPicture}</p>}
                 </div>
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="businessLogo" className="text-base font-light">
@@ -311,13 +345,14 @@ const Tab3MainPage = () => {
                     onChange={handleFileChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
+                  {errors.businessLogo && <p className="text-red-500">{errors.businessLogo}</p>}
                 </div>
               </>
             )}
 
             {/* Submit or Next Button */}
             <button type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
-              {step === 3 ? "Submit" : "Next"}
+              {isLoading ? "Submitting..." : step === 3 ? "Submit" : "Next"}
             </button>
           </form>
         </div>

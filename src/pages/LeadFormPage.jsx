@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import axiosInstance from "../api/axiosInstance";
 
 const LeadFormPage = () => {
 
@@ -27,68 +28,60 @@ const LeadFormPage = () => {
       Swal.fire({
         icon: "error",
         title: "Validation Error",
-        text: "All fields are required."
+        text: "All fields are required.",
       });
       return;
     }
-
-    navigate(`/tab7form/${tabName}`);
-
     // Validate email format
     if (!validateEmail(email)) {
       Swal.fire({
         icon: "error",
         title: "Validation Error",
-        text: "Please enter a valid email address."
+        text: "Please enter a valid email address.",
       });
       return;
     }
 
     // Prepare payload and set loading state
     setIsLoading(true);
-    const payload = { name, email, businessName, phone, pictureId, tabName };
+    const payload = { name, email, businessName, phone, tabId : Number(pictureId), tabName };
 
     try {
-      // Send POST request to a random API endpoint
-      const response = await fetch("https://example.com/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
+      // Send POST request using axios
+      const response = await axiosInstance.post('/lead', payload); // Replace with actual endpoint
 
-      if (!response.ok) {
-        throw new Error("Submission failed");
+      if (response.status === 200) {
+        // On successful submission, show success modal via SweetAlert2
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: `Congratulations! Your card has been sent to your email: ${email}`,
+        });
+
+        // Optionally clear the form
+        setName('');
+        setEmail('');
+        setBusinessName('');
+        setPhone('');
+        navigate(`/tab7form/${tabName}`);
+      } else {
+        throw new Error('Submission failed');
       }
-
-      // On successful submission, show success modal via SweetAlert2
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: `Congratulations! Your card has been sent to your email: ${email}`
-      });
-
-      // Optionally clear the form
-      setName('');
-      setEmail('');
-      setBusinessName('');
-      setPhone('');
-      navigate(`/tab7form/${tabName}`)
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Submission Error",
-        text: "Submission failed. Please try again."
+        text: "Submission failed. Please try again.",
       });
     } finally {
       setIsLoading(false);
     }
   };
 
+
   return (
     <div className='min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#DBEDFF] to-[#FFFFFF] py-8'>
-      <div className='w-[1440px] py-28 px-12 rounded-4xl gap-x-10 flex shadow-2xl h-full bg-gradient-to-l from-[#002F5F] to-[#0071E3] shadow-black/15 border-[1px] border-[#f4f4f4] '>
+      <div className='max-w-[1440px] w-[95%] py-28 px-12 rounded-4xl gap-x-10 flex shadow-2xl h-full bg-gradient-to-l from-[#002F5F] to-[#0071E3] shadow-black/15 border-[1px] border-[#f4f4f4] '>
         <div className="w-[50%] min-h-full flex flex-col justify-center items-center">
           <h2 className="text-[32px] font-bold text-white">WELCOME TO</h2>
           <div className="flex my-4 justify-center items-center w-full">
@@ -103,7 +96,7 @@ const LeadFormPage = () => {
           {
                 tabName === "flyer" ? "get more info" :
                   tabName === "businessCard" ? "Get Your Card" :
-                    tabName === "piebackCalculator" ? "Submit & Get Your Analysis" :
+                    tabName === "piebackCalculator" ? "Get Your Analysis" :
                       "Enter below Details"
               }
           </h3>

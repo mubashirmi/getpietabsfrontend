@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../api/axiosInstance'; // Assuming axiosInstance is in the api folder
 
 const Tab4MainPage = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Tab4MainPage = () => {
   });
 
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false); // State for showing loader
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,57 +35,79 @@ const Tab4MainPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/general-info-form/1/chargebackRiskAssesment');
-    
-    // Count yes responses from all yes/no toggle fields
-    const yesKeys = [
-      'refundPolicyYes',
-      'trackRecordsYes',
-      'verifyAuthenticityYes',
-      'recognizableNameYes',
-      'fraudDetectionYes',
-      'complaintsProcessYes',
-      'trackingInfoYes',
-      'customerSupportYes',
-      'paymentProcessorYes'
-    ];
-    let yesCount = 0;
-    yesKeys.forEach(key => {
-      if (formData[key] === 'yes') {
-        yesCount++;
-      }
-    });
 
-    let analysisTitle = '';
-    let analysisMessage = '';
-
-    if (yesCount >= 8) {
-      analysisTitle = 'Low Risk of Chargebacks';
-      analysisMessage =
-        'Your business and policies are well protected. There’s always more you could be doing and Pie Pay can help you stay as safe as possible. Schedule a meeting with us to learn more.';
-    } else if (yesCount >= 5 && yesCount <= 7) {
-      analysisTitle = 'Some Risk of Chargebacks';
-      analysisMessage =
-        'Your business carries some risk of chargebacks and needs updates to its policies and processor protections. Schedule a meeting with us to learn more.';
-    } else if (yesCount >= 3 && yesCount <= 4) {
-      analysisTitle = 'Moderate risk of chargebacks';
-      analysisMessage =
-        'Your business has a moderate to high risk of chargebacks and needs immediate updates to its policies, procedures and processor. Schedule a meeting with us to learn more.';
-    } else {
-      analysisTitle = 'High Risk of chargebacks';
-      analysisMessage =
-        'Your business has a very high risk of chargebacks and is open to fraud from customers. You need an immediate assessment of your policies and procedures to protect your business processing from chargeback fraud. Schedule a meeting with us to learn more.';
+    // Basic validation to ensure all fields are filled
+    const isFormValid = Object.values(formData).every(value => value !== '');
+    if (!isFormValid) {
+      alert('Please fill in all questions');
+      return;
     }
 
-    setResult({
-      yesCount,
-      analysisTitle,
-      analysisMessage
-    });
-  };
+    setLoading(true); // Show loader
 
+    // Prepare data in the required format
+    const payload = {
+      question1: [{
+        question: 'Refund, Return, and Shipping Policies',
+        answer: formData.refundPolicy,
+        booleanAnswer: formData.refundPolicyYes
+      }],
+      question2: [{
+        question: 'Tracking and Maintaining Records of Transactions',
+        answer: formData.trackRecords,
+        booleanAnswer: formData.trackRecordsYes
+      }],
+      question3: [{
+        question: 'Verification of Customer Transactions',
+        answer: formData.verifyAuthenticity,
+        booleanAnswer: formData.verifyAuthenticityYes
+      }],
+      question4: [{
+        question: 'Recognizable Business Name on Credit Card Statements',
+        answer: '',
+        booleanAnswer: formData.recognizableNameYes
+      }],
+      question5: [{
+        question: 'Identification of Fraudulent or Suspicious Transactions',
+        answer: formData.fraudDetection,
+        booleanAnswer: formData.fraudDetectionYes
+      }],
+      question6: [{
+        question: 'Handling Customer Complaints or Disputes',
+        answer: formData.complaintsProcess,
+        booleanAnswer: formData.complaintsProcessYes
+      }],
+      question7: [{
+        question: 'Tracking Information and Delivery Confirmations',
+        answer: '',
+        booleanAnswer: formData.trackingInfoYes
+      }],
+      question8: [{
+        question: 'Accessibility of Customer Support',
+        answer: formData.customerSupport,
+        booleanAnswer: formData.customerSupportYes
+      }],
+      question9: [{
+        question: 'Payment Processor and Fraud Protection Tools',
+        answer: '',
+        booleanAnswer: formData.paymentProcessorYes
+      }]
+    };
+
+    try {
+      // Send data to the backend
+      await axiosInstance.post('/submit-chargeback-risk', payload);
+      navigate('/general-info-form/1/chargebackRiskAssesment');
+    } catch (error) {
+      console.error('Error submitting data:', error);
+      alert('An error occurred while submitting the data.');
+    } finally {
+      setLoading(false); // Hide loader after the submission
+    }
+  };
+  
   return (
     <div className='w-full min-h-[calc(100vh-72px)] bg-gradient-to-r from-[#0071E3] to-[#002F5F]'>
     <div className="max-w-[750px] w-[99.5%] mx-auto p-4">
@@ -281,9 +305,16 @@ const Tab4MainPage = () => {
           </div>
         </div>
 
+        {/* Submit Button */}
         <div className="text-center mt-6">
-          <button type="submit" className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium">Submit Assessment</button>
-        </div>
+            <button type="submit" className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium">
+              {loading ? (
+                <div className="w-6 h-6 border-4 border-t-4 border-white rounded-full animate-spin"></div>
+              ) : (
+                'Submit Assessment'
+              )}
+            </button>
+          </div>
       </form>
 
       {result && (

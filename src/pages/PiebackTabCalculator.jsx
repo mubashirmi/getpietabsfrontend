@@ -1,12 +1,9 @@
 import { useRef, useState } from "react";
-import { LuCalculator, LuPhoneCall } from "react-icons/lu";
-import { Doughnut } from "react-chartjs-2";
+import { LuPhoneCall } from "react-icons/lu";
 import { Chart as ChartJS, Title, Tooltip, ArcElement, Legend } from "chart.js";
-import { FaLocationArrow } from "react-icons/fa6";
-import { IoArrowRedoCircleOutline } from "react-icons/io5";
-import { MdOutlineFileDownload } from "react-icons/md";
 import domtoimage from 'dom-to-image';
 import { useNavigate } from "react-router-dom";
+import QRCode from "react-qr-code";
 
 // Register Chart.js components
 ChartJS.register(Title, Tooltip, ArcElement, Legend);
@@ -14,6 +11,20 @@ ChartJS.register(Title, Tooltip, ArcElement, Legend);
 const PiebackTabCalculator = () => {
     const calculatorRef = useRef();
     const navigate = useNavigate();
+
+
+    const [isOpen, setIsOpen] = useState(false);
+
+
+    // Functions to open & close modal
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
+    const handleOutsideClick = (e) => {
+        if (e.target.id === 'modalBackdrop') {
+            closeModal();
+        }
+    };
+
 
     const [referralAccountVolume, setReferralAccountVolume] = useState(0);
     const [numberOfReferrals, setNumberOfReferrals] = useState(0);
@@ -23,50 +34,15 @@ const PiebackTabCalculator = () => {
     const [isYearly, setIsYearly] = useState(false); // Track if the user selected yearly
 
     // Calculate Total Referral Volume based on the provided formula
-    const totalReferralVolume =
-        referralAccountVolume * numberOfReferrals * 0.015 * 0.15;
+    const totalReferralVolume = referralAccountVolume * numberOfReferrals * 0.015 * 0.15;
 
     // Savings calculation
-    const savings = isYearly
-        ? (currentMonthlyFee - personMonthlyFee) * 12
-        : currentMonthlyFee - personMonthlyFee;
+    const savings = isYearly ? (currentMonthlyFee - personMonthlyFee) * 12 : currentMonthlyFee - personMonthlyFee;
 
     // Earnings calculation
-    const earnings = isYearly
-        ? ((totalReferralVolume + businessVolume * 0.015) * 0.125) * 12
-        : (totalReferralVolume + businessVolume * 0.015) * 0.125;
+    const earnings = isYearly ? ((totalReferralVolume + businessVolume * 0.015) * 0.125) * 12 : (totalReferralVolume + businessVolume * 0.015) * 0.125;
 
-    // Doughnut chart data
-    const data = {
-        labels: ['Savings with PiePay', 'Earnings with Getpie.io'],
-        datasets: [
-            {
-                label: 'Monthly vs Yearly',
-                data: [savings, earnings],
-                backgroundColor: savings || earnings ? ['#FF6384', '#36A2EB'] : ['#e0e0e0', '#e0e0e0'], // Default gray if empty
-                hoverBackgroundColor: ['#FF6384', '#36A2EB'], // Hover effect
-                hoverOffset: 4,
-            },
-        ],
-    };
-
-    // Doughnut chart options to disable hover effect if empty
-    const options = {
-        responsive: true,
-        plugins: {
-            tooltip: {
-                enabled: savings || earnings ? true : false, // Disable tooltip when chart is empty
-            },
-            legend: {
-                display: false,
-            },
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true,
-        },
-    };
-
+    console.log(savings, earnings);
     // Handlers for all input fields
     const handleReferralVolumeRangeChange = (e) => {
         setReferralAccountVolume(Number(e.target.value));
@@ -131,7 +107,7 @@ const PiebackTabCalculator = () => {
 
     return (
         <div className="min-h-[100vh] bg-gradient-to-r from-[#4686BC] to-[#62956A] w-full flex flex-col justify-center items-center pt-20 pb-10">
-            <div className="w-[1211px] bg-white rounded-[25px] p-[30px] relative" ref={calculatorRef}>
+            <div className="max-w-[1440px] w-[95%] bg-white rounded-[25px] p-[30px] mx-auto" ref={calculatorRef}>
                 <h3 className='text-[32px] font-bold text-center mb-5'> PIE BACK CALCULATOR</h3>
                 <div className='flex justify-between gap-3'>
                     <div className='w-[50%] pl-3'>
@@ -262,7 +238,6 @@ const PiebackTabCalculator = () => {
                         </div>
                     </div>
                     <div className='w-[50%] pl-8 pr-4'>
-
                         <div className="flex justify-between mb-4">
                             <label className="text-xl font-medium">Select Period</label>
                             <select
@@ -277,21 +252,20 @@ const PiebackTabCalculator = () => {
                         </div>
                         <div>
                             <div className="mb-5 bg-[#F1F1F1] rounded-[50px]">
-                                <div className="flex gap-x-5 p-[5px] h-full bg-[#4686BC] rounded-[50px] min-w-fit items-center">
-                                    <div className="w-[100px] h-[100px] bg-[#C0C0C0] rounded-full"/>
-                                    <div className={`h-full text-white min-w-fit flex justify-center items-center flex-col`}>
+                                <div className={`flex gap-x-5 p-[5px] h-full bg-[#4686BC] rounded-[50px] min-w-fit items-center `} style={{ width: `${savings}%` }}>
+                                    <div className="min-w-[100px] min-h-[100px] bg-[#C0C0C0] rounded-full" />
+                                    <div className={`h-full text-white min-w-fit w-full flex justify-center flex-col`}>
                                         <h6 className="font-medium">Savings</h6>
-                                        <h6 className="font-medium">{}%</h6>
+                                        <h6 className="font-medium">{ }%</h6>
                                     </div>
                                 </div>
                             </div>
-
                             <div className="mb-[80px] bg-[#F1F1F1] rounded-[50px]">
-                                <div className="flex gap-x-5 p-[5px] h-full bg-[#62956A] rounded-[50px] min-w-fit items-center">
-                                    <div className="w-[100px] h-[100px] bg-[#C0C0C0] rounded-full"/>
-                                    <div className={`h-full text-white min-w-fit flex justify-center items-center flex-col`}>
-                                        <h6 className="font-medium">Savings</h6>
-                                        <h6 className="font-medium">{}%</h6>
+                                <div className={`flex gap-x-5 p-[5px] h-full bg-[#62956A] rounded-[50px] min-w-fit items-center`}>
+                                    <div className="min-w-[100px] h-[100px] bg-[#C0C0C0] rounded-full" />
+                                    <div className={`h-full text-white min-w-fit w-full flex justify-center flex-col`}>
+                                        <h6 className="font-medium">Earnings</h6>
+                                        <h6 className="font-medium">{ }%</h6>
                                     </div>
                                 </div>
                             </div>
@@ -312,12 +286,52 @@ const PiebackTabCalculator = () => {
                         </div>
                     </div>
                 </div>
+                <div className="mt-10 flex gap-3 justify-center">
+                    <button onClick={() => navigate(`/general-info-form/${"1"}/piebackCalculator`)} className="bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200">Get Your analysis</button>
+                    <button onClick={openModal} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
+                </div>
             </div>
-            <div className="mt-8 flex gap-3 justify-center">
-                <button onClick={() => navigate(`/schedule-a-meeting/${"wsw"}/piebackCalculator`)} className="cursor-pointer flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><LuPhoneCall color="#f4f4f4" size={19} /></div><span className="text-lg text-[#f4f4f4] font-medium">SCHEDULE AN APPOINTMENT</span></button>
-                <button onClick={handleCreateBusinessCard} className="cursor-pointer flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><IoArrowRedoCircleOutline color="#f4f4f4" size={24} /></div><span className="text-lg text-[#f4f4f4] font-medium">GET THIS ANALYSIS QR + LINK </span></button>
-                <button onClick={handleCreateBusinessCard} className="cursor-pointer flex items-center gap-2 bg-blue-700/70 border-2 border-blue-500 py-2.5 shadow-lg shadow-blue-300/60 px-5 rounded-xl"><div><MdOutlineFileDownload color="#f4f4f4" size={23} /></div><span className="text-lg text-[#f4f4f4] font-medium">DOWNLOAD THIS ANALYSIS</span></button>
+            {/* Informational Last Section */}
+            <div className='max-w-[1440px] w-[96%] mt-10 rounded-[20px] p-12 flex flex-col items-center gap-y-5 bg-gradient-to-r from-[#DBEDFF] to-[#FFFFFF] shadow-xl shadow-black/15 mb-24'>
+                <h3 className='uppercase font-semibold text-4xl text-[#090909]'>Learn More About Our Business?</h3>
+                <p className='font-medium text-[24px] text-center'>
+                    Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.
+                </p>
+                <button onClick={() => navigate("/schedule-a-meeting/1/piebackCalculator")} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
             </div>
+            {/* Modal */}
+            {isOpen && (
+                <div
+                    id="modalBackdrop"
+                    onClick={handleOutsideClick}
+                    className="fixed inset-0 bg-gray-900/40 bg-opacity-10 flex justify-center items-center"
+                >
+                    <div className="relative bg-white rounded-xl p-6 max-w-lg w-full shadow-xl">
+                        {/* Close button at top-left */}
+                        <span
+                            className="absolute top-4 right-4 text-4xl cursor-pointer bg-slate-400/30 hover:bg-slate-400/50 transition-all duration-300 ease-in-out rounded-full h-10 w-10 flex justify-center items-center"
+                            onClick={closeModal}
+                        >
+                            &times;
+                        </span>
+
+                        {/* Modal Content */}
+                        <div className="flex flex-col items-center">
+                            <div className="mt-6">
+                                <QRCode
+                                    value="https://getpietabsfrontend.vercel.app/general-info-form/1/piebackCalculator"
+                                    size={200}
+                                    fgColor="#4A90E2"
+                                    bgColor="#F5F5F5"
+                                />
+                            </div>
+                            <p className="mt-5 text-gray-700 text-center text-xl font-semibold">
+                                Scan QR code & get the Flyer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

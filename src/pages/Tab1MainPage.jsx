@@ -1,14 +1,25 @@
 import QRCode from 'react-qr-code'; // Import the QR code library
 import { useNavigate } from 'react-router-dom';
 import FlyerBenifits from '../components/FlyerBenifits';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import domtoimage from 'dom-to-image';
+import axiosInstance from "../api/axiosInstance"
 
 const Tab1MainPage = () => {
   const navigate = useNavigate();
 
+  const [ data , setData ] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    axiosInstance.get('/flyer')  // Replace with your API endpoint
+      .then(response => {
+        setData(response.data);  // Store the response data in state
+      })
+      .catch(error => {
+        console.error('There was an error!', error);  // Handle any errors
+      });
+  }, []);  // 
 
   // Functions to open & close modal
   const openModal = () => setIsOpen(true);
@@ -51,7 +62,8 @@ const Tab1MainPage = () => {
           <img
             ref={imageRef}
             className="h-full object-contain hover:scale-110 transition-transform duration-700 ease-in-out rounded-[20px] shadow-xl shadow-black/15"
-            src="piepayflyer.png"
+            // src="piepayflyer.png"
+            src={data?.image}
             alt="Flyer Image"
           />
         </div>
@@ -59,13 +71,13 @@ const Tab1MainPage = () => {
         {/* Right Section - Text and Actions */}
         <div className="w-full lg:w-[55%] flex flex-col justify-center my-[80px] gap-y-5">
           <h2>
-            <span className='gradient-text text-[48px] font-extrabold'>Flyer Details</span>
+            <span className='gradient-text text-[48px] font-extrabold'>{data?.flyerName}</span>
           </h2>
-          <p className='font-medium text-2xl '>Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.</p>
+          <p className='font-medium text-2xl '>{data?.description}</p>
           <div className='flex gap-x-3'>
-            <button onClick={() => navigate("/general-info-form/1/flyer")} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get More Info</button>
-            <button onClick={openModal} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
-            <button onClick={captureAndDownload} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Downnload <img className='w-[21px] h-[21px]' src="downnloadbtnicon.png" alt="" /></button>
+            <button onClick={() => navigate(`/general-info-form/${data.id}/Flyer`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get More Info</button>
+            <button onClick={openModal} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
+            <button onClick={captureAndDownload} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Downnload <img className='w-[21px] h-[21px]' src="downnloadbtnicon.png" alt="" /></button>
           </div>
 
         </div>
@@ -85,7 +97,7 @@ const Tab1MainPage = () => {
         <p className='font-medium text-[24px] text-center'>
           Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.
         </p>
-        <button onClick={() => navigate("/general-info-form/1/flyer")} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
+        <button onClick={() => navigate(`/schedule-a-meeting/${data.id}/Flyer`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
       </div>
 
       {/* Modal */}
@@ -108,7 +120,7 @@ const Tab1MainPage = () => {
             <div className="flex flex-col items-center">
               <div className="mt-6">
                 <QRCode
-                  value="https://getpietabsfrontend.vercel.app/general-info-form/1/flyer"
+                  value={`https://getpietabsfrontend.vercel.app/general-info-form/${image.id}/Flyer`}
                   size={200}
                   fgColor="#4A90E2"
                   bgColor="#F5F5F5"
