@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 
 
-const PreviewBusinessCard = () => {
+const PreviewCalculator = () => {
   const { cardId } = useParams();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +12,7 @@ const PreviewBusinessCard = () => {
 
 
   useEffect(() => {
-    axiosInstance.get(`/businessCard/${cardId}`)  // Replace with your API endpoint
+    axiosInstance.get(`/calculator/${cardId}`)  // Replace with your API endpoint
       .then(response => {
         setImage(response.data);  // Store the response data in state
       })
@@ -31,9 +31,9 @@ const PreviewBusinessCard = () => {
   return (
     <div className='min-h-[calc(100vh-72px)] w-full flex flex-col justify-center gap-y-10 items-center'>
       <div className="w-full flex flex-col items-center justify-center py-16 bg-gradient-to-r from-[#DBEDFF] to-[#FFFFFF]">
-        <img className="w-[480px] rounded-[11px] shadow-2xl shadow-blue-900/70" src={image?.image} alt="" />
+        <img className="max-w-[1100px] rounded-[11px] shadow-2xl shadow-blue-900/70" src={image?.image} alt="" />
         <div className="flex justify-center items-center gap-x-5 mt-10">
-          <button onClick={() => navigate(`/general-info-form/${cardId}/Business-Card`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get This Card</button>
+          <button onClick={() => navigate(`/general-info-form/${cardId}/Calculator`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get Your Analysis</button>
           <button onClick={openModal} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="/qr-code-scan.png" alt="" /></button>
         </div>
       </div>
@@ -43,7 +43,7 @@ const PreviewBusinessCard = () => {
         <p className='font-medium text-[24px] text-center'>
           Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.
         </p>
-        <button onClick={() => navigate(`/schedule-a-meeting/${cardId}/Business-Card`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
+        <button onClick={() => navigate(`/schedule-a-meeting/${cardId}/Calculator`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
       </div>
 
 
@@ -74,7 +74,7 @@ const PreviewBusinessCard = () => {
                 />
               </div>
               <p className="mt-5 text-gray-700 text-center text-xl font-semibold">
-                Scan QR code & get the Flyer
+                Scan QR code & get your analysis 
               </p>
             </div>
           </div>
@@ -87,4 +87,4 @@ const PreviewBusinessCard = () => {
   )
 }
 
-export default PreviewBusinessCard
+export default PreviewCalculator

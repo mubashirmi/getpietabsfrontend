@@ -4,6 +4,7 @@ import { Chart as ChartJS, Title, Tooltip, ArcElement, Legend } from "chart.js";
 import domtoimage from 'dom-to-image';
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
+import axiosInstance from "../api/axiosInstance";
 
 // Register Chart.js components
 ChartJS.register(Title, Tooltip, ArcElement, Legend);
@@ -11,21 +12,6 @@ ChartJS.register(Title, Tooltip, ArcElement, Legend);
 const PiebackTabCalculator = () => {
     const calculatorRef = useRef();
     const navigate = useNavigate();
-
-
-    const [isOpen, setIsOpen] = useState(false);
-
-
-    // Functions to open & close modal
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
-    const handleOutsideClick = (e) => {
-        if (e.target.id === 'modalBackdrop') {
-            closeModal();
-        }
-    };
-
-
     const [referralAccountVolume, setReferralAccountVolume] = useState(0);
     const [numberOfReferrals, setNumberOfReferrals] = useState(0);
     const [businessVolume, setBusinessVolume] = useState(0);
@@ -42,7 +28,13 @@ const PiebackTabCalculator = () => {
     // Earnings calculation
     const earnings = isYearly ? ((totalReferralVolume + businessVolume * 0.015) * 0.125) * 12 : (totalReferralVolume + businessVolume * 0.015) * 0.125;
 
+    // Calculate percentage for savings and earnings
+    const total = savings + earnings;
+    const savingsPercentage = total ? (savings / total) * 100 : 0;
+    const earningsPercentage = total ? (earnings / total) * 100 : 0;
+
     console.log(savings, earnings);
+
     // Handlers for all input fields
     const handleReferralVolumeRangeChange = (e) => {
         setReferralAccountVolume(Number(e.target.value));
@@ -88,22 +80,27 @@ const PiebackTabCalculator = () => {
         try {
             const element = calculatorRef.current;
             if (!element) return;
-
-            const dataUrl = await domtoimage.toPng(element);
-            const response = await fetch(dataUrl);
-            const blob = await response.blob();
+    
+            const dataUrl = await domtoimage.toPng(element); // Get data URL of the image
+            const response = await fetch(dataUrl); // Fetch the image from the data URL
+            const blob = await response.blob(); // Convert the data URL to a blob
+    
             const formData = new FormData();
-            formData.append('image', blob, 'business_card.png');
-            navigate(`/general-info-form/${"1"}/piebackCalculator`);
-            await fetch('http://localhost:4000/api/tab6', {
-                method: 'POST',
-                body: formData,
+            formData.append('image', blob, 'business_card.png'); // Append blob as image
+    
+            const res = await axiosInstance.post('/calculator', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data', // Ensure the correct content type is set
+                }
             });
+    
+            if (res.status === 200 || res.status === 201) {
+                navigate(`/preview-analysis/${res.data.id}`);                
+            }
         } catch (error) {
             console.error('Error capturing and sending image:', error);
         }
     };
-
 
     return (
         <div className="min-h-[100vh] bg-gradient-to-r from-[#4686BC] to-[#62956A] w-full flex flex-col justify-center items-center pt-20 pb-10">
@@ -248,24 +245,31 @@ const PiebackTabCalculator = () => {
                                 <option value="Monthly">Monthly</option>
                                 <option value="Yearly">Yearly</option>
                             </select>
-
                         </div>
                         <div>
                             <div className="mb-5 bg-[#F1F1F1] rounded-[50px]">
-                                <div className={`flex gap-x-5 p-[5px] h-full bg-[#4686BC] rounded-[50px] min-w-fit items-center `} style={{ width: `${savings}%` }}>
+                                <div className={`flex gap-x-5 p-[5px] h-full bg-[#4686BC] rounded-[50px] min-w-fit items-center`} style={{ width: `${savingsPercentage}%` }}>
                                     <div className="min-w-[100px] min-h-[100px] bg-[#C0C0C0] rounded-full" />
                                     <div className={`h-full text-white min-w-fit w-full flex justify-center flex-col`}>
                                         <h6 className="font-medium">Savings</h6>
-                                        <h6 className="font-medium">{ }%</h6>
+                                        <div className="flex w-full items-center">
+                                            <div className="w-full border-0 border-t-2 border-t-white"/>
+                                            <span className="text-xl inline-block -translate-x-2">{">"}</span>
+                                        </div>
+                                        <h6 className="font-medium">{savingsPercentage.toFixed(2)}%</h6>
                                     </div>
                                 </div>
                             </div>
                             <div className="mb-[80px] bg-[#F1F1F1] rounded-[50px]">
-                                <div className={`flex gap-x-5 p-[5px] h-full bg-[#62956A] rounded-[50px] min-w-fit items-center`}>
+                                <div className={`flex gap-x-5 p-[5px] h-full bg-[#62956A] rounded-[50px] min-w-fit items-center`} style={{ width: `${earningsPercentage}%` }}>
                                     <div className="min-w-[100px] h-[100px] bg-[#C0C0C0] rounded-full" />
                                     <div className={`h-full text-white min-w-fit w-full flex justify-center flex-col`}>
                                         <h6 className="font-medium">Earnings</h6>
-                                        <h6 className="font-medium">{ }%</h6>
+                                        <div className="flex w-full items-center">
+                                            <div className="w-full border-0 border-t-2 border-t-white"/>
+                                            <span className="text-xl inline-block -translate-x-2">{">"}</span>
+                                        </div>
+                                        <h6 className="font-medium">{earningsPercentage.toFixed(2)}%</h6>
                                     </div>
                                 </div>
                             </div>
@@ -287,8 +291,8 @@ const PiebackTabCalculator = () => {
                     </div>
                 </div>
                 <div className="mt-10 flex gap-3 justify-center">
-                    <button onClick={() => navigate(`/general-info-form/${"1"}/piebackCalculator`)} className="bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200">Get Your analysis</button>
-                    <button onClick={openModal} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
+                    <button onClick={handleCreateBusinessCard} className="bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200">Get Your analysis</button>
+                    <button onClick={handleCreateBusinessCard} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></button>
                 </div>
             </div>
             {/* Informational Last Section */}
@@ -299,39 +303,6 @@ const PiebackTabCalculator = () => {
                 </p>
                 <button onClick={() => navigate("/schedule-a-meeting/1/piebackCalculator")} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
             </div>
-            {/* Modal */}
-            {isOpen && (
-                <div
-                    id="modalBackdrop"
-                    onClick={handleOutsideClick}
-                    className="fixed inset-0 bg-gray-900/40 bg-opacity-10 flex justify-center items-center"
-                >
-                    <div className="relative bg-white rounded-xl p-6 max-w-lg w-full shadow-xl">
-                        {/* Close button at top-left */}
-                        <span
-                            className="absolute top-4 right-4 text-4xl cursor-pointer bg-slate-400/30 hover:bg-slate-400/50 transition-all duration-300 ease-in-out rounded-full h-10 w-10 flex justify-center items-center"
-                            onClick={closeModal}
-                        >
-                            &times;
-                        </span>
-
-                        {/* Modal Content */}
-                        <div className="flex flex-col items-center">
-                            <div className="mt-6">
-                                <QRCode
-                                    value="https://getpietabsfrontend.vercel.app/general-info-form/1/piebackCalculator"
-                                    size={200}
-                                    fgColor="#4A90E2"
-                                    bgColor="#F5F5F5"
-                                />
-                            </div>
-                            <p className="mt-5 text-gray-700 text-center text-xl font-semibold">
-                                Scan QR code & get the Flyer
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

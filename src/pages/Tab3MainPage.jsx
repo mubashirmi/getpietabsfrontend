@@ -107,7 +107,7 @@ const Tab3MainPage = () => {
           },
         });
 
-        navigate("/general-info-form/1/sliceOfTheMarket");
+        navigate("/general-info-form/1/Slice-of-the-market");
       } catch (error) {
         console.error("Error submitting data:", error);
       }

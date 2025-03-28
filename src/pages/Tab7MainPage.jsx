@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 const Tab7MainPage = () => {
 
-  const { pictureId , tabName } = useParams();
+  const { pictureId, tabName } = useParams();
 
   const [formData, setFormData] = useState({
     processor: '',
@@ -29,15 +29,32 @@ const Tab7MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosInstance.post('/finalForm', formData)
-    .then((response) => {
-      alert("Form submitted successfully!");
-      // Handle response as needed
-    })
-    .catch((error) => {
-      console.error("Error submitting form: ", error);
-      alert("There was an error submitting the form.");
-    });
+  
+    const submitData = {
+      ...formData,
+      tabName: tabName
+    };
+  
+    // Add image ID fields based on tabName
+    if (tabName === "Flyer") {
+      submitData.flyerId = Number(pictureId);
+    } else if (tabName === "Business-Card") {
+      submitData.businessCardImageId = Number(pictureId);
+    } else if (tabName === "Calculator") {
+      submitData.calculatorImageId = Number(pictureId);
+    }
+  
+    // Send the data
+    axiosInstance.post('/finalForm', submitData)
+      .then((response) => {
+        alert("Form submitted successfully!");
+        // Handle response as needed
+      })
+      .catch((error) => {
+        console.error("Error submitting form: ", error);
+        alert("There was an error submitting the form.");
+      });
+  
     if (
       formData.processor &&
       formData.businessDuration &&
@@ -50,7 +67,7 @@ const Tab7MainPage = () => {
       formData.foodDelivery &&
       formData.costIncreasePlans
     ) {
-      console.log("hj")
+      console.log("Form is ready to be submitted.")
     } else {
       alert("Please answer all the questions.");
     }
@@ -103,6 +120,19 @@ const Tab7MainPage = () => {
                     id="previousProcessor"
                     name="previousProcessor"
                     value={formData.previousProcessor}
+                    onChange={handleChange}
+                    className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
+                  />
+                </div>
+                <div className="mb-4 flex flex-col gap-1">
+                  <label htmlFor="previousProcessor" className="text-base font-light">
+                  How much volume in credit and debit do you do?
+                  </label>
+                  <input
+                    type="text"
+                    id="volume"
+                    name="volume"
+                    value={formData.volume}
                     onChange={handleChange}
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />

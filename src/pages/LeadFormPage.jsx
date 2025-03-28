@@ -60,7 +60,7 @@ const LeadFormPage = () => {
       // Send POST request using axios
       const response = await axiosInstance.post('/lead', payload); // Replace with actual endpoint
 
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         // On successful submission, show success modal via SweetAlert2
         Swal.fire({
           icon: "success",

@@ -11,6 +11,7 @@ import Tab7MainPage from './pages/Tab7MainPage'
 import MeetingFormPage from './pages/MeetingFormPage'
 import PreviewBusinessCard from './pages/PreviewBusinessCard'
 import Tab8MainPage from './pages/Tab8MainPage'
+import PreviewCalculator from './pages/PreviewCalculator'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/general-info-form/:pictureId/:tabName' element={<LeadFormPage />} />
         <Route path='/schedule-a-meeting/:pictureId/:tabName' element={<MeetingFormPage />} />
         <Route path='/preview-business-card/:cardId' element={<PreviewBusinessCard />} />
+        <Route path='/preview-analysis/:cardId' element={<PreviewCalculator />} />
         <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
         <Route path='/merchant-analysis/:pictureId/:tabName' element={<Tab7MainPage />} />
         <Route path='/pie-proshop' element={<Tab8MainPage />} />
