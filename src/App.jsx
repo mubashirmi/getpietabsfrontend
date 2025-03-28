@@ -1,7 +1,7 @@
 import Tab1MainPage from './pages/Tab1MainPage'
 import LeadFormPage from './pages/LeadFormPage'
 import Tab6MainPage from './pages/Tab6MainPage'
-import { Routes ,Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import PiebackTabCalculator from './pages/PiebackTabCalculator'
 import Navbar from './components/Navbar'
 import Tab3MainPage from './pages/Tab3MainPage'
@@ -15,20 +15,20 @@ import Tab8MainPage from './pages/Tab8MainPage'
 const App = () => {
   return (
     <>
-    <Navbar />
-    <Routes>
-      <Route path='/' element={<Tab1MainPage />} />
-      <Route path='/businesscard' element={<Tab6MainPage />} />
-      <Route path='/sliceOfTheMarket' element={<Tab3MainPage />} />
-      <Route path='/chargebackRiskAnalysis' element={<Tab4MainPage />} />
-      <Route path='/loanFinancialAnalysis' element={<Tab5MainPage />} />
-      <Route path='/general-info-form/:pictureId/:tabName' element={<LeadFormPage />} />
-      <Route path='/schedule-a-meeting/:pictureId/:tabName' element={<MeetingFormPage />} />
-      <Route path='/preview-business-card/:cardId' element={<PreviewBusinessCard />} />
-      <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
-      <Route path='/merchant-analysis' element={<Tab7MainPage />} />
-      <Route path='/pie-proshop' element={<Tab8MainPage />} />
-    </Routes>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Tab1MainPage />} />
+        <Route path='/businesscard' element={<Tab6MainPage />} />
+        <Route path='/sliceOfTheMarket' element={<Tab3MainPage />} />
+        <Route path='/chargebackRiskAnalysis' element={<Tab4MainPage />} />
+        <Route path='/loanFinancialAnalysis' element={<Tab5MainPage />} />
+        <Route path='/general-info-form/:pictureId/:tabName' element={<LeadFormPage />} />
+        <Route path='/schedule-a-meeting/:pictureId/:tabName' element={<MeetingFormPage />} />
+        <Route path='/preview-business-card/:cardId' element={<PreviewBusinessCard />} />
+        <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
+        <Route path='/merchant-analysis/:pictureId/:tabName' element={<Tab7MainPage />} />
+        <Route path='/pie-proshop' element={<Tab8MainPage />} />
+      </Routes>
     </>
   )
 }

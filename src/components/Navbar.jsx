@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className='flex pt-3 pb-4 justify-between  text-black/80 font-medium text-base items-center max-w-[1440px] mx-auto'>
         <div className='w-11'>
@@ -13,7 +12,7 @@ const Navbar = () => {
         <button onClick={()=>navigate('/chargebackRiskAnalysis')} className=' cursor-pointer rounded-lg '>Charge Back Risk Analysis</button>      
         <button onClick={()=>navigate('/loanFinancialAnalysis')} className=' cursor-pointer rounded-lg '>Loan Financial Analysis</button>      
         <button onClick={()=>navigate('/piebackcalculator')} className=' cursor-pointer rounded-lg '>PieBack Calculator</button>      
-        <button onClick={()=>navigate('/merchant-analysis')} className=' cursor-pointer rounded-lg '>Merchant Analysis</button>      
+        <button onClick={()=>navigate('/merchant-analysis/1/merchant-analysis')} className=' cursor-pointer rounded-lg '>Merchant Analysis</button>      
         <button onClick={()=>navigate('/pie-proshop')} className=' cursor-pointer rounded-lg '>Pie ProShop</button>      
     </div>
   )

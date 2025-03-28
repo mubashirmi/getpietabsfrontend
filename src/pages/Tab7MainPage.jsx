@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 const Tab7MainPage = () => {
+
+  const { pictureId , tabName } = useParams();
+
   const [formData, setFormData] = useState({
     processor: '',
     businessDuration: '',
@@ -12,10 +16,7 @@ const Tab7MainPage = () => {
     profitMargin: '',
     ticketPrice: '',
     foodDelivery: '',
-    costIncreasePlans: '',
-    // to be discussed
-    tabName:"Loan-Application"
-    
+    costIncreasePlans: ''
   });
 
   const handleChange = (e) => {
@@ -188,9 +189,6 @@ const Tab7MainPage = () => {
                   Next
                 </button>
               </>
-
-
-
           </form>
         </div>
       </div>

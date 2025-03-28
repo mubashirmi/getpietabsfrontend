@@ -409,7 +409,7 @@ const Tab6MainPage = () => {
             </div>
             <div className='flex gap-x-3 mt-10'>
             <button onClick={handleCreateBusinessCard} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get This Card</button>
-            <button onClick={() => navigate("/schedule-a-meeting/1/businessCard")} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Schedule A Meeting <img className='w-[21px] h-[21px]' src="downnloadbtnicon.png" alt="" /></button>
+            {/* <button onClick={() => navigate("/schedule-a-meeting/1/Business-Card")} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Schedule A Meeting <img className='w-[21px] h-[21px]' src="downnloadbtnicon.png" alt="" /></button> */}
           </div>
           </div>
         </div>

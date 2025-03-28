@@ -7,7 +7,7 @@ const MeetingFormPage = () => {
 
   const navigate = useNavigate();
   const { pictureId , tabName } = useParams();
-  
+
   // Updated state variables
   const [businessName, setBusinessName] = useState('');
   const [merchantName, setMerchantName] = useState('');
@@ -37,7 +37,23 @@ const MeetingFormPage = () => {
 
     // Prepare payload and set loading state
     setIsLoading(true);
-    const payload = { bizName : businessName, merchantName, bizAddress : businessAddress , meetingTime , meetingDate, tabName : "Loan-Application"};
+    let payload = { 
+      bizName: businessName, 
+      merchantName, 
+      bizAddress: businessAddress, 
+      meetingTime, 
+      meetingDate, 
+      tabName 
+    };
+
+    // Dynamically add image ID based on tabName
+    if (tabName === "Flyer") {
+      payload.flyerId = Number(pictureId);
+    } else if (tabName === "Business-Card") {
+      payload.businessCardImageId = Number(pictureId);
+    } else if (tabName === "Calculator") {
+      payload.calculatorImageId = Number(pictureId);
+    }
 
     try {
       // Send POST request using axios
@@ -57,7 +73,7 @@ const MeetingFormPage = () => {
         setBusinessAddress('');
         setMeetingTime('');
         setMeetingDate('');
-        navigate(`/tab7form/${tabName}`);
+        navigate(`/merchant-analysis/${pictureId}/${tabName}`);
       } else {
         throw new Error('Submission failed');
       }
@@ -71,7 +87,6 @@ const MeetingFormPage = () => {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div className='min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#DBEDFF] to-[#FFFFFF] py-8'>

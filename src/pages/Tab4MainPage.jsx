@@ -98,7 +98,7 @@ const Tab4MainPage = () => {
 
     try {
       // Send data to the backend
-      await axiosInstance.post('/submit-chargeback-risk', payload);
+      await axiosInstance.post('/question-analysis', payload);
       navigate('/general-info-form/1/chargebackRiskAssesment');
     } catch (error) {
       console.error('Error submitting data:', error);

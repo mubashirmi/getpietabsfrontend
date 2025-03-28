@@ -7,7 +7,7 @@ const LeadFormPage = () => {
 
   const navigate = useNavigate();
 
-  const { pictureId, tabName } = useParams();
+  const { pictureId , tabName } = useParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [businessName, setBusinessName] = useState('');
@@ -44,7 +44,17 @@ const LeadFormPage = () => {
 
     // Prepare payload and set loading state
     setIsLoading(true);
-    const payload = { name, email, businessName, phone, tabId : Number(pictureId), tabName };
+
+    // Set dynamic field based on tabName prop
+    let payload = { name, email, businessName, phone, tabName };
+
+    if (tabName === "Flyer") {
+      payload.flyerId = Number(pictureId);
+    } else if (tabName === "Business-Card") {
+      payload.businessCardImageId = Number(pictureId);
+    } else if (tabName === "Calculator") {
+      payload.calculatorImageId = Number(pictureId);
+    }
 
     try {
       // Send POST request using axios
@@ -63,7 +73,7 @@ const LeadFormPage = () => {
         setEmail('');
         setBusinessName('');
         setPhone('');
-        navigate(`/tab7form/${tabName}`);
+        navigate(`/merchant-analysis/${pictureId}/${tabName}`);
       } else {
         throw new Error('Submission failed');
       }
@@ -86,19 +96,18 @@ const LeadFormPage = () => {
           <h2 className="text-[32px] font-bold text-white">WELCOME TO</h2>
           <div className="flex my-4 justify-center items-center w-full">
             <img src="/public/Logo.png" alt="logo getpie.io" className="w-[175px]" />
-
           </div>
           <h2 className="text-[32px] font-bold text-white mb-4">GETPIE.IO</h2>
           <p className="text-center text-white font-medium text-2xl">Lorem . Esse illum ut veniam amet, quasi nisissimos. Soluta aut laborum repellat velit! Cum, voluptates mollitia facere obcaecati neque repellendus molestias ipsam ex eos, possimus reprehenderit optio provident! Recusandae quae distinctio odit magnam tempora, quibusdam et.</p>
         </div>
         <div className="w-[50%] bg-white px-10 py-12 h-full rounded-[25px] shadow-2xl shadow-black/10">
           <h3 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wide">
-          {
-                tabName === "flyer" ? "get more info" :
-                  tabName === "businessCard" ? "Get Your Card" :
-                    tabName === "piebackCalculator" ? "Get Your Analysis" :
-                      "Enter below Details"
-              }
+            {
+              tabName === "flyer" ? "get more info" :
+                tabName === "businessCard" ? "Get Your Card" :
+                  tabName === "piebackCalculator" ? "Get Your Analysis" :
+                    "Enter below Details"
+            }
           </h3>
           <form onSubmit={handleSubmit}>
             {/* Name Field */}
