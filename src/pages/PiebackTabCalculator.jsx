@@ -104,9 +104,9 @@ const PiebackTabCalculator = () => {
 
     return (
         <div className="min-h-[100vh] bg-gradient-to-r from-[#4686BC] to-[#62956A] w-full flex flex-col justify-center items-center pt-20 pb-10">
-            <div className="max-w-[1440px] bg-white w-[95%]  rounded-[25px] p-[30px] mx-auto">
-                <div className="w-full" ref={calculatorRef}>
-                    <h3 className='text-[32px] font-bold text-center mb-5'> PIE BACK CALCULATOR</h3>
+            <div className="max-w-[1440px] bg-white w-[95%]  rounded-[25px] mx-auto">
+                <div className="w-full p-[30px] " ref={calculatorRef}>
+                    <h3 className='text-[36px] font-bold text-center mb-7'> PIE BACK CALCULATOR</h3>
                     <div className='flex justify-between gap-3'>
                         <div className='w-[50%] pl-3'>
                             {/* Referral Account Volume */}
@@ -249,7 +249,7 @@ const PiebackTabCalculator = () => {
                             </div>
                             <div>
                                 <div className="mb-5 bg-[#F1F1F1] rounded-[50px]">
-                                    <div className={`flex gap-x-5 p-[5px] h-full bg-[#4686BC] rounded-[50px] min-w-fit items-center max-w-[100%]`} style={{ width: `${savingsPercentage}%` }}>
+                                    <div className={`flex gap-x-5 p-[5px] h-full bg-[#4686BC] rounded-[50px] min-w-fit items-center max-w-[100%] pr-10`} style={{ width: `${savingsPercentage}%` }}>
                                         <div className="min-w-[100px] min-h-[100px] bg-[#C0C0C0] rounded-full" />
                                         <div className={`h-full text-white min-w-fit w-full flex justify-center flex-col`}>
                                             <h6 className="font-medium">Savings</h6>
@@ -262,7 +262,7 @@ const PiebackTabCalculator = () => {
                                     </div>
                                 </div>
                                 <div className="mb-[80px] bg-[#F1F1F1] rounded-[50px]">
-                                    <div className={`flex gap-x-5 p-[5px] h-full bg-[#62956A] rounded-[50px] min-w-fit items-center max-w-[100%]`} style={{ width: `${earningsPercentage}%` }}>
+                                    <div className={`flex gap-x-5 p-[5px] h-full bg-[#62956A] rounded-[50px] min-w-fit items-center max-w-[100%] pr-10`} style={{ width: `${earningsPercentage}%` }}>
                                         <div className="min-w-[100px] h-[100px] bg-[#C0C0C0] rounded-full" />
                                         <div className={`h-full text-white min-w-fit w-full flex justify-center flex-col`}>
                                             <h6 className="font-medium">Earnings</h6>
@@ -292,7 +292,7 @@ const PiebackTabCalculator = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-10 flex gap-3 justify-center">
+                <div className="mb-10 mt-6 flex gap-3 justify-center">
                     <button onClick={handleCreateBusinessCard} className="bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200">Get Your analysis</button>
                     <button onClick={handleCreateBusinessCard} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></button>
                 </div>
