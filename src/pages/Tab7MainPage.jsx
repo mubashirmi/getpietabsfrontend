@@ -45,7 +45,7 @@ const Tab7MainPage = () => {
     }
   
     // Send the data
-    axiosInstance.post('/finalForm', submitData)
+    axiosInstance.post('/merchant-analysis', submitData)
       .then((response) => {
         alert("Form submitted successfully!");
         // Handle response as needed
