@@ -2,12 +2,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import QRCode from "react-qr-code";
 import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
+import Loader from "../components/Loader";
 
 
 const PreviewCalculator = () => {
   const { cardId } = useParams();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [ mainLoading, setMainLoading ] = useState(true);
   const [image, setImage] = useState(null);
 
 
@@ -15,9 +17,11 @@ const PreviewCalculator = () => {
     axiosInstance.get(`/calculator/${cardId}`)  // Replace with your API endpoint
       .then(response => {
         setImage(response.data);  // Store the response data in state
+        setMainLoading(false);
       })
       .catch(error => {
         console.error('There was an error!', error);  // Handle any errors
+        setMainLoading(false);
       });
   }, []);
   // Functions to open & close modal
@@ -29,6 +33,7 @@ const PreviewCalculator = () => {
     }
   };
   return (
+    mainLoading ? <Loader /> :
     <div className='min-h-[calc(100vh-72px)] w-full flex flex-col justify-center gap-y-10 items-center'>
       <div className="w-full flex flex-col items-center justify-center py-16 bg-gradient-to-r from-[#DBEDFF] to-[#FFFFFF]">
         <img className="max-w-[1100px] rounded-[11px] shadow-2xl shadow-blue-900/70" src={image?.image} alt="" />

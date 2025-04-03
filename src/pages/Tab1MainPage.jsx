@@ -3,20 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import FlyerBenifits from '../components/FlyerBenifits';
 import { useEffect, useRef, useState } from 'react';
 import domtoimage from 'dom-to-image';
-import axiosInstance from "../api/axiosInstance"
-
+import axiosInstance from "../api/axiosInstance";
+import Loader from "../components/Loader";
 const Tab1MainPage = () => {
   const navigate = useNavigate();
 
   const [ data , setData ] = useState(null);
+  const [ mainLoading, setMainLoading ] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     axiosInstance.get('/flyer')  // Replace with your API endpoint
       .then(response => {
         setData(response.data);  // Store the response data in state
+        setMainLoading(false);
       })
       .catch(error => {
+        setMainLoading(false);
         console.error('There was an error!', error);  // Handle any errors
       });
   }, []);  // 
@@ -54,6 +57,7 @@ const Tab1MainPage = () => {
   
   
   return (
+    mainLoading ? <Loader /> :
     <div className="w-[97%] min-h-screen max-w-[1440px] mx-auto">
       <div className=" mx-auto flex flex-col lg:flex-row justify-between gap-10 px-5">
         <div className='absolute w-[38vw] 2xl:w-[41vw] bg-gradient-to-r from-[#002F5F] to-[#0071E3] opacity-90 left-0 -z-20 h-[860px]' />

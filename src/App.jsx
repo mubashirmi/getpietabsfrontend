@@ -12,11 +12,11 @@ import MeetingFormPage from './pages/MeetingFormPage'
 import PreviewBusinessCard from './pages/PreviewBusinessCard'
 import Tab8MainPage from './pages/Tab8MainPage'
 import PreviewCalculator from './pages/PreviewCalculator'
+import Layout from './components/Layout'
 
 const App = () => {
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Routes>
         <Route path='/' element={<Tab1MainPage />} />
         <Route path='/businesscard' element={<Tab6MainPage />} />
@@ -31,7 +31,7 @@ const App = () => {
         <Route path='/merchant-analysis/:pictureId/:tabName' element={<Tab7MainPage />} />
         <Route path='/pie-proshop' element={<Tab8MainPage />} />
       </Routes>
-    </>
+    </Layout>
   )
 }
 export default App
