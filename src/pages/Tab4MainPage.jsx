@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance'; // Assuming axiosInstance is in the api folder
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Tab4MainPage = () => {
   const navigate = useNavigate();
@@ -307,10 +308,8 @@ const Tab4MainPage = () => {
 
         {/* Submit Button */}
         <div className="text-center mt-6">
-            <button type="submit" className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium">
-              {loading ? (
-                <div className="w-6 h-6 border-4 border-t-4 border-white rounded-full animate-spin"></div>
-              ) : (
+            <button type="submit" className="bg-blue-500 min-w-64 text-white px-6 py-3 rounded-md font-medium">
+              {loading ? ( <CircularProgress size={24} color="white" /> ) : (
                 'Submit Assessment'
               )}
             </button>

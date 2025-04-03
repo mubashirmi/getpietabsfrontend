@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import axiosInstance from "../api/axiosInstance";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const MeetingFormPage = () => {
 
@@ -170,7 +171,7 @@ const MeetingFormPage = () => {
               />
             </div>
             <button type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
-              Submit
+              {isLoading ? ( <CircularProgress size={24} color="white" /> ) : "Submit" }
             </button>
           </form>
         </div>

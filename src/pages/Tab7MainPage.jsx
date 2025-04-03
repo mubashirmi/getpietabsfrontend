@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import { useParams } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Tab7MainPage = () => {
 
   const { pictureId, tabName } = useParams();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     processor: '',
     businessDuration: '',
@@ -29,7 +30,7 @@ const Tab7MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+    setIsLoading(true);
     const submitData = {
       ...formData,
       tabName: tabName
@@ -47,10 +48,12 @@ const Tab7MainPage = () => {
     // Send the data
     axiosInstance.post('/merchant-analysis', submitData)
       .then((response) => {
+        setIsLoading(false);
         alert("Form submitted successfully!");
         // Handle response as needed
       })
       .catch((error) => {
+        setIsLoading(false);
         console.error("Error submitting form: ", error);
         alert("There was an error submitting the form.");
       });
@@ -73,14 +76,12 @@ const Tab7MainPage = () => {
     }
   };
   
-
   return (
     <div className="min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#0071E3] to-[#002F5F] w-full px-4 sm:px-8 py-10">
       <div className="max-w-[1440px] mx-auto w-[99%] flex justify-center items-center gap-x-9 ">
-
         <div className="w-[886px] bg-white px-10 py-12 h-full rounded-[25px] shadow-2xl shadow-black/10">
-          <h3 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wide">
-          Merchant Analysis
+          <h3 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-5 tracking-wide">
+            Merchant Analysis
           </h3>
           <form onSubmit={handleSubmit}>
               <>
@@ -110,7 +111,6 @@ const Tab7MainPage = () => {
                     className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                   />
                 </div>
-
                 <div className="mb-4 flex flex-col gap-1">
                   <label htmlFor="previousProcessor" className="text-base font-light">
                     Have you used another processor before?
@@ -216,7 +216,7 @@ const Tab7MainPage = () => {
                   />
                 </div>
                 <button className='text-white w-full font-medium text-xl bg-[#0071E3] py-2.5 px-8 rounded-[10px] cursor-pointer  hover:shadow-blue-500/20 duration-300 transition-all ease-in-out hover:shadow-xl'>
-                  Next
+                  {isLoading ? ( <CircularProgress size={24} color="white" /> ) : "Next" }
                 </button>
               </>
           </form>

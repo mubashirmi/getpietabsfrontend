@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance"; // Import your axiosInstance
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Tab3MainPage = () => {
   const navigate = useNavigate();
@@ -352,7 +353,7 @@ const Tab3MainPage = () => {
 
             {/* Submit or Next Button */}
             <button type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
-              {isLoading ? "Submitting..." : step === 3 ? "Submit" : "Next"}
+              {isLoading ? ( <CircularProgress size={24} color="white" /> ) : step === 3 ? "Submit" : "Next"}
             </button>
           </form>
         </div>

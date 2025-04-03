@@ -2,12 +2,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import axiosInstance from "../api/axiosInstance";
-
+import CircularProgress from '@mui/material/CircularProgress';
 const LeadFormPage = () => {
 
   const navigate = useNavigate();
 
-  const { pictureId , tabName } = useParams();
+  const { pictureId, tabName } = useParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [businessName, setBusinessName] = useState('');
@@ -163,12 +163,17 @@ const LeadFormPage = () => {
               />
             </div>
             <button type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
-              {
-                tabName === "flyer" ? "Get Flyer" :
-                  tabName === "businessCard" ? "Get Your Business Card" :
-                    tabName === "piebackCalculator" ? "Submit & Get Your Analysis" :
-                      "Submit"
-              }
+              {isLoading ? (
+                <CircularProgress size={24} color="white" />
+              ) : tabName === "flyer" ? (
+                "Get Flyer"
+              ) : tabName === "businessCard" ? (
+                "Get Your Business Card"
+              ) : tabName === "piebackCalculator" ? (
+                "Submit & Get Your Analysis"
+              ) : (
+                "Submit"
+              )}
             </button>
           </form>
         </div>

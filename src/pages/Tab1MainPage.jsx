@@ -124,7 +124,7 @@ const Tab1MainPage = () => {
             <div className="flex flex-col items-center">
               <div className="mt-6">
                 <QRCode
-                  value={`https://getpietabsfrontend.vercel.app/general-info-form/${image.id}/Flyer`}
+                  value={`https://getpietabsfrontend.vercel.app/general-info-form/${data.id}/Flyer`}
                   size={200}
                   fgColor="#4A90E2"
                   bgColor="#F5F5F5"

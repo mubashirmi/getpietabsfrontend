@@ -1,11 +1,9 @@
 import { useRef, useState } from "react";
-import { LuPhoneCall } from "react-icons/lu";
 import { Chart as ChartJS, Title, Tooltip, ArcElement, Legend } from "chart.js";
 import domtoimage from 'dom-to-image';
 import { useNavigate } from "react-router-dom";
-import QRCode from "react-qr-code";
 import axiosInstance from "../api/axiosInstance";
-
+import CircularProgress from '@mui/material/CircularProgress';
 // Register Chart.js components
 ChartJS.register(Title, Tooltip, ArcElement, Legend);
 
@@ -17,6 +15,8 @@ const PiebackTabCalculator = () => {
     const [businessVolume, setBusinessVolume] = useState(0);
     const [personMonthlyFee, setPersonMonthlyFee] = useState(0);
     const [currentMonthlyFee, setCurrentMonthlyFee] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading2, setIsLoading2] = useState(false);
     const [isYearly, setIsYearly] = useState(false); // Track if the user selected yearly
 
     // Calculate Total Referral Volume based on the provided formula
@@ -76,7 +76,8 @@ const PiebackTabCalculator = () => {
         setIsYearly(e.target.value === "Yearly");
     };
 
-    const handleCreateBusinessCard = async () => {
+    const handleCreateBusinessCard = async (btn) => {
+        if(btn === "btn1"){setIsLoading(true)}else{setIsLoading2(true)}
         try {
             const element = calculatorRef.current;
             if (!element) return;
@@ -99,6 +100,9 @@ const PiebackTabCalculator = () => {
             }
         } catch (error) {
             console.error('Error capturing and sending image:', error);
+        } finally{
+          setIsLoading(false);
+          setIsLoading2(false);
         }
     };
 
@@ -293,8 +297,8 @@ const PiebackTabCalculator = () => {
                     </div>
                 </div>
                 <div className="mb-10 mt-6 flex gap-3 justify-center">
-                    <button onClick={handleCreateBusinessCard} className="bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200">Get Your analysis</button>
-                    <button onClick={handleCreateBusinessCard} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></button>
+                    <button onClick={()=>handleCreateBusinessCard("btn1")} className="bg-[#0071E3] min-w-72 py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200"> {isLoading ? ( <CircularProgress size={24} color="white" /> ) :"Get Your analysis"}</button>
+                    <button onClick={()=>handleCreateBusinessCard("btn2")} className='border min-w-72 justify-center border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>{isLoading2 ? ( <CircularProgress size={24} color="bluez" /> ) :<div className="flex justify-center items-center gap-x-2.5">Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></div>}</button>
                 </div>
             </div>
             {/* Informational Last Section */}
