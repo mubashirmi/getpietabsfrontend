@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Tab5MainPage = () => {
   const navigate = useNavigate();
   const [loanToggler, setLoanToggler] = useState(true);
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   // Form states
   const [formData, setFormData] = useState({
     annualIncome: '',
@@ -59,7 +61,7 @@ const Tab5MainPage = () => {
       alert('Please upload at least one bank statement');
       return;
     }
-
+    setIsLoading(true);
     const formPayload = new FormData();
     // Append form data
     Object.entries(formData).forEach(([key, value]) => {
@@ -80,6 +82,8 @@ const Tab5MainPage = () => {
     } catch (error) {
       console.error('Submission error:', error);
       alert('Submission failed. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -94,8 +98,8 @@ const Tab5MainPage = () => {
                 Application For Loan
               </span>
             </h2>
-            <p className="font-medium text-xl mt-2.5">
-              {/* Existing content */}
+            <p className="font-medium text-xl mt-1">
+              Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
             </p>
           </div>
 
@@ -165,42 +169,66 @@ const Tab5MainPage = () => {
         </div>
       ) : (
 
-        <div className="max-w-[1320px] flex justify-center items-center gap-x-5 rounded-[20px] bg-white shadow-2xl shadow-black/25 p-10 mx-auto">
+        <div className="max-w-[1320px] flex justify-center items-center gap-x-5 rounded-[20px] bg-white shadow-lg shadow-black/35 p-10 mx-auto">
           {/* Left Section */}
           <div className="w-1/2 pl-2 pr-7">
-            {/* Existing content */}
+            <h2>
+              <span className="uppercase font-bold text-[32px] text-transparent bg-clip-text bg-gradient-to-r from-[#0071E3] to-[#002F5F]">
+                Eligible Loan
+              </span>
+            </h2>
+            <p className="font-medium text-xl mt-2">You may be eligible for up to $20,000 with Pie Pay Funding! Your approval code is 2209.</p>
+            <p className="font-medium text-xl mt-2.5">Please upload a bank statement (pdf only) and schedule a meeting with a local agent to move forward with the application.</p>
           </div>
 
           {/* Right Section */}
           <div className="w-1/2 rounded-[25px] shadow-2xl shadow-black/15 py-12 px-10 border-2 border-[#f4f4f4]">
-            <h2 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wide">
+            <h2 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wider">
               Schedule Meeting
             </h2>
-            
+
             <div className="flex flex-col mt-5 mb-7">
               <label>Upload Upto 3 Bank Statement (Optional)</label>
-              <input
-                type="file"
-                multiple
-                onChange={handleFileChange}
-                className="mt-1"
-                accept=".pdf"
-              />
+              <div className="relative mt-1">
+                {/* Hidden file input */}
+                <input
+                  type="file"
+                  id="fileUpload"
+                  multiple
+                  onChange={handleFileChange}
+                  className="absolute opacity-0 w-full h-full cursor-pointer left-0 top-0"
+                  accept=".pdf"
+                />
+
+                {/* Custom button-style label */}
+                <label
+                  htmlFor="fileUpload"
+                  className=" py-1.5 px-5 rounded-[10px] text-lg font-medium border-[1px] border-[#D6D6D6] cursor-pointer transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200 inline-block text-center"
+                >
+                  Choose PDF Files
+                </label>
+              </div>
+
+              {/* Optional: Display selected file names */}
+              {files.length > 0 && (
+                <div className="mt-2 text-sm text-gray-500">
+                  Selected: {files.map(f => f.name).join(', ')}
+                </div>
+              )}
             </div>
 
             <div className="flex items-center gap-x-3">
               <button
                 onClick={() => navigate("/schedule-a-meeting/1/Loan-Application")}
-                className='bg-[#0071E3] py-2.5 w-1/2 rounded-[25px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'
+                className='bg-[#0071E3] py-2.5 w-1/2 rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'
               >
                 Schedule A Meeting
               </button>
               <button
                 onClick={submitForm}
-                className='border w-1/2 border-[#0071E3] text-[#0071E3] py-2.5 rounded-[25px] text-xl font-medium flex items-center justify-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'
+                className='border w-1/2 border-[#0071E3] text-[#0071E3] py-2.5 rounded-[10px] text-xl font-medium flex items-center justify-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'
               >
-                Download Analysis
-                <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" />
+                {isLoading ? (<CircularProgress size={24} color="bluez" />) : <div className="flex justify-center items-center gap-x-2.5">Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></div>}
               </button>
             </div>
           </div>

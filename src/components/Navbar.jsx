@@ -14,6 +14,7 @@ const Navbar = () => {
         <button onClick={()=>navigate('/piebackcalculator')} className=' cursor-pointer rounded-lg '>PieBack Calculator</button>      
         <button onClick={()=>navigate('/merchant-analysis/1/merchant-analysis')} className=' cursor-pointer rounded-lg '>Merchant Analysis</button>      
         <button onClick={()=>navigate('/pie-proshop')} className=' cursor-pointer rounded-lg '>Pie ProShop</button>      
+        <button onClick={()=>navigate('/referralForm')} className=' cursor-pointer rounded-lg '>Referral</button>      
     </div>
   )
 }

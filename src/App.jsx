@@ -13,6 +13,7 @@ import PreviewBusinessCard from './pages/PreviewBusinessCard'
 import Tab8MainPage from './pages/Tab8MainPage'
 import PreviewCalculator from './pages/PreviewCalculator'
 import Layout from './components/Layout'
+import ReferralTab from './pages/ReferralTab'
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path='/piebackcalculator' element={<PiebackTabCalculator />} />
         <Route path='/merchant-analysis/:pictureId/:tabName' element={<Tab7MainPage />} />
         <Route path='/pie-proshop' element={<Tab8MainPage />} />
+        <Route path='/referralForm' element={<ReferralTab />} />
       </Routes>
     </Layout>
   )
