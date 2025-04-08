@@ -5,12 +5,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Tab5MainPage = () => {
   const navigate = useNavigate();
-  const [loanToggler, setLoanToggler] = useState(true);
+  const [step, setStep] = useState(1); // 1 = Initial Form, 2 = Loan Application, 3 = Eligible Loan
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Form states
+  // Initial Form Data (name, email, phone)
+  const [initialFormData, setInitialFormData] = useState({
+    fullName: '',
+    email: '',
+    phoneNumber: ''
+  });
+
+  // Loan Application Form Data
   const [formData, setFormData] = useState({
     annualIncome: '',
     businessDuration: '',
@@ -23,7 +30,16 @@ const Tab5MainPage = () => {
     cosigners: ''
   });
 
-  const validateFirstForm = () => {
+  const validateInitialForm = () => {
+    const newErrors = {};
+    if (!initialFormData.fullName.trim()) newErrors.fullName = 'Name is required';
+    if (!initialFormData.email.trim() || !/\S+@\S+\.\S+/.test(initialFormData.email)) newErrors.email = 'Valid email is required';
+    if (!initialFormData.phoneNumber.trim() || isNaN(initialFormData.phoneNumber)) newErrors.phoneNumber = 'Valid phone number is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const validateLoanForm = () => {
     const newErrors = {};
     if (!formData.annualIncome.trim()) newErrors.annualIncome = 'Annual income is required';
     if (!formData.businessDuration.trim()) newErrors.businessDuration = 'Business duration is required';
@@ -39,17 +55,30 @@ const Tab5MainPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const handleInitialFormSubmit = () => {
+    if (validateInitialForm()) {
+      setStep(2); // Proceed to loan application
+    }
+  };
+
   const handleNext = () => {
-    if (validateFirstForm()) {
-      setLoanToggler(false);
+    if (validateLoanForm()) {
+      setStep(3); // Proceed to eligible loan form
     }
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value
-    });
+    if (step === 1) {
+      setInitialFormData({
+        ...initialFormData,
+        [e.target.id]: e.target.value
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value
+      });
+    }
   };
 
   const handleFileChange = (e) => {
@@ -65,6 +94,9 @@ const Tab5MainPage = () => {
     const formPayload = new FormData();
     // Append form data
     Object.entries(formData).forEach(([key, value]) => {
+      formPayload.append(key, value);
+    });
+    Object.entries(initialFormData).forEach(([key, value]) => {
       formPayload.append(key, value);
     });
     // Append files
@@ -89,27 +121,75 @@ const Tab5MainPage = () => {
 
   return (
     <div className="bg-gradient-to-l py-10 from-[#002F5F] to-[#0071E3] w-full min-h-[calc(100vh-72px)]">
-      {loanToggler ? (
+      {step === 1 && (
         <div className="max-w-[1320px] flex justify-center items-center gap-x-5 rounded-[20px] bg-white shadow-2xl shadow-black/25 p-10 mx-auto">
-          {/* Left Section - Remains Same */}
           <div className="w-1/2 pl-2 pr-7">
             <h2>
               <span className="uppercase font-bold text-[32px] text-transparent bg-clip-text bg-gradient-to-r from-[#0071E3] to-[#002F5F]">
-                Application For Loan
+                Personal Information
               </span>
             </h2>
             <p className="font-medium text-xl mt-1">
-              Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
+              Please provide your personal details to proceed to the loan application.
             </p>
           </div>
 
-          {/* Right Form Section */}
+          <div className="w-1/2 rounded-[25px] shadow-2xl shadow-black/15 py-12 px-10 border-2 border-[#f4f4f4]">
+            <h2 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wide">
+              Personal Info
+            </h2>
+
+            {/* Personal Info Form */}
+            {[
+              { id: 'fullName', label: 'Your Name' },
+              { id: 'email', label: 'Your Email', type: 'email' },
+              { id: 'phoneNumber', label: 'Your Phone Number', type: 'number' }
+            ].map((field) => (
+              <div key={field.id} className="mb-4 flex flex-col gap-1">
+                <label htmlFor={field.id} className="text-base font-light">
+                  {field.label}
+                </label>
+                <input
+                  type={field.type || 'text'}
+                  id={field.id}
+                  className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
+                  value={initialFormData[field.id]}
+                  onChange={handleChange}
+                />
+                {errors[field.id] && <span className="text-red-500 text-sm">{errors[field.id]}</span>}
+              </div>
+            ))}
+
+            <button
+              onClick={handleInitialFormSubmit}
+              type="button"
+              className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="max-w-[1320px] flex justify-center items-center gap-x-5 rounded-[20px] bg-white shadow-2xl shadow-black/25 p-10 mx-auto">
+          <div className="w-1/2 pl-2 pr-7">
+            <h2>
+              <span className="uppercase font-bold text-[32px] text-transparent bg-clip-text bg-gradient-to-r from-[#0071E3] to-[#002F5F]">
+                Loan Application
+              </span>
+            </h2>
+            <p className="font-medium text-xl mt-1">
+            Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
+            </p>
+          </div>
+
           <div className="w-1/2 rounded-[25px] shadow-2xl shadow-black/15 py-12 px-10 border-2 border-[#f4f4f4]">
             <h2 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wide">
               LOAN Application
             </h2>
 
-            {/* Updated Form Fields with Validations */}
+            {/* Loan Application Form */}
             {[
               { id: 'annualIncome', label: 'What is your current annual income?' },
               { id: 'businessDuration', label: 'How long have you been in business?' },
@@ -167,10 +247,10 @@ const Tab5MainPage = () => {
             </button>
           </div>
         </div>
-      ) : (
+      )}
 
+      {step === 3 && (
         <div className="max-w-[1320px] flex justify-center items-center gap-x-5 rounded-[20px] bg-white shadow-lg shadow-black/35 p-10 mx-auto">
-          {/* Left Section */}
           <div className="w-1/2 pl-2 pr-7">
             <h2>
               <span className="uppercase font-bold text-[32px] text-transparent bg-clip-text bg-gradient-to-r from-[#0071E3] to-[#002F5F]">
@@ -181,7 +261,6 @@ const Tab5MainPage = () => {
             <p className="font-medium text-xl mt-2.5">Please upload a bank statement (pdf only) and schedule a meeting with a local agent to move forward with the application.</p>
           </div>
 
-          {/* Right Section */}
           <div className="w-1/2 rounded-[25px] shadow-2xl shadow-black/15 py-12 px-10 border-2 border-[#f4f4f4]">
             <h2 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wider">
               Schedule Meeting
@@ -190,7 +269,6 @@ const Tab5MainPage = () => {
             <div className="flex flex-col mt-5 mb-7">
               <label>Upload Upto 3 Bank Statement (Optional)</label>
               <div className="relative mt-1">
-                {/* Hidden file input */}
                 <input
                   type="file"
                   id="fileUpload"
@@ -199,8 +277,6 @@ const Tab5MainPage = () => {
                   className="absolute opacity-0 w-full h-full cursor-pointer left-0 top-0"
                   accept=".pdf"
                 />
-
-                {/* Custom button-style label */}
                 <label
                   htmlFor="fileUpload"
                   className=" py-1.5 px-5 rounded-[10px] text-lg font-medium border-[1px] border-[#D6D6D6] cursor-pointer transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200 inline-block text-center"
@@ -209,7 +285,6 @@ const Tab5MainPage = () => {
                 </label>
               </div>
 
-              {/* Optional: Display selected file names */}
               {files.length > 0 && (
                 <div className="mt-2 text-sm text-gray-500">
                   Selected: {files.map(f => f.name).join(', ')}
