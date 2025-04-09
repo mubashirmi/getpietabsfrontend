@@ -83,7 +83,6 @@ const Tab1MainPage = () => {
             <button onClick={openModal} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
             <button onClick={captureAndDownload} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Downnload <img className='w-[21px] h-[21px]' src="downnloadbtnicon.png" alt="" /></button>
           </div>
-
         </div>
       </div>
       {/* Benifits section */}

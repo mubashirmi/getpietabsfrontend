@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance"; // Import your axiosInstance
 import CircularProgress from '@mui/material/CircularProgress';
+import QRCode from "react-qr-code";
+import { BsQrCodeScan } from "react-icons/bs";
 
 const Tab3MainPage = () => {
   const navigate = useNavigate();
 
   // Initial form data state split by steps
   const [step, setStep] = useState(1); // Step 1, Step 2, Step 3
+  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     // Step 1
     name: "",
@@ -30,6 +33,16 @@ const Tab3MainPage = () => {
 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+
+
+    // Functions to open & close modal
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
+    const handleOutsideClick = (e) => {
+      if (e.target.id === 'modalBackdrop') {
+        closeModal();
+      }
+    };
 
   // Validate fields based on step
   const validate = () => {
@@ -126,9 +139,11 @@ const Tab3MainPage = () => {
           <h3 className="uppercase text-[32px] font-bold text-white mb-2">
             Slice of the market
           </h3>
-          <p className="text-xl font-semibold text-[#DFDFDF]">
+          <p className="text-xl font-semibold text-[#DFDFDF] mb-5">
             Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
           </p>
+          <button onClick={openModal} className='border border-[#fff] text-[#fff] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <BsQrCodeScan color="white" size={25}/></button>
+
         </div>
         <div className="w-[50%] bg-white px-10 py-12 h-full rounded-[25px] shadow-2xl shadow-black/10">
           <h3 className="text-4xl text-[#1E1E1E] font-semibold uppercase text-center mb-3 tracking-wide">
@@ -358,6 +373,39 @@ const Tab3MainPage = () => {
           </form>
         </div>
       </div>
+            {/* Modal */}
+            {isOpen && (
+        <div
+          id="modalBackdrop"
+          onClick={handleOutsideClick}
+          className="fixed inset-0 bg-gray-900/40 bg-opacity-10 flex justify-center items-center"
+        >
+          <div className="relative bg-white rounded-xl p-6 max-w-lg w-full shadow-xl">
+            {/* Close button at top-left */}
+            <span
+              className="absolute top-4 right-4 text-4xl cursor-pointer bg-slate-400/30 hover:bg-slate-400/50 transition-all duration-300 ease-in-out rounded-full h-10 w-10 flex justify-center items-center"
+              onClick={closeModal}
+            >
+              &times;
+            </span>
+
+            {/* Modal Content */}
+            <div className="flex flex-col items-center">
+              <div className="mt-6">
+                <QRCode
+                  value={`https://getpietabsfrontend.vercel.app/general-info-form/1/Slice-of-the-market`}
+                  size={200}
+                  fgColor="#4A90E2"
+                  bgColor="#F5F5F5"
+                />
+              </div>
+              <p className="mt-5 text-gray-700 text-center text-xl font-semibold">
+                Scan QR code 
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

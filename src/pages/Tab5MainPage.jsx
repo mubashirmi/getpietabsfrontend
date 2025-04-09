@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import CircularProgress from '@mui/material/CircularProgress';
+import QRCode from "react-qr-code";
 
 const Tab5MainPage = () => {
   const navigate = useNavigate();
@@ -9,6 +10,8 @@ const Tab5MainPage = () => {
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
 
   // Initial Form Data (name, email, phone)
   const [initialFormData, setInitialFormData] = useState({
@@ -16,6 +19,14 @@ const Tab5MainPage = () => {
     email: '',
     phoneNumber: ''
   });
+  // Functions to open & close modal
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+  const handleOutsideClick = (e) => {
+    if (e.target.id === 'modalBackdrop') {
+      closeModal();
+    }
+  };
 
   // Loan Application Form Data
   const [formData, setFormData] = useState({
@@ -129,9 +140,11 @@ const Tab5MainPage = () => {
                 Personal Information
               </span>
             </h2>
-            <p className="font-medium text-xl mt-1">
+            <p className="font-medium text-xl mt-1 mb-4">
               Please provide your personal details to proceed to the loan application.
             </p>
+            <button onClick={openModal} className='border-2 border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
+
           </div>
 
           <div className="w-1/2 rounded-[25px] shadow-2xl shadow-black/15 py-12 px-10 border-2 border-[#f4f4f4]">
@@ -179,9 +192,11 @@ const Tab5MainPage = () => {
                 Loan Application
               </span>
             </h2>
-            <p className="font-medium text-xl mt-1">
-            Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
+            <p className="font-medium text-xl mt-1 mb-4">
+              Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
             </p>
+            <button onClick={openModal} className='border-2 border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
+
           </div>
 
           <div className="w-1/2 rounded-[25px] shadow-2xl shadow-black/15 py-12 px-10 border-2 border-[#f4f4f4]">
@@ -258,7 +273,8 @@ const Tab5MainPage = () => {
               </span>
             </h2>
             <p className="font-medium text-xl mt-2">You may be eligible for up to $20,000 with Pie Pay Funding! Your approval code is 2209.</p>
-            <p className="font-medium text-xl mt-2.5">Please upload a bank statement (pdf only) and schedule a meeting with a local agent to move forward with the application.</p>
+            <p className="font-medium text-xl mt-2.5 mb-4">Please upload a bank statement (pdf only) and schedule a meeting with a local agent to move forward with the application.</p>
+            <button onClick={openModal} className='border-2 border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <img className='w-[22px] h-[22px]' src="qr-code-scan.png" alt="" /></button>
           </div>
 
           <div className="w-1/2 rounded-[25px] shadow-2xl shadow-black/15 py-12 px-10 border-2 border-[#f4f4f4]">
@@ -305,6 +321,39 @@ const Tab5MainPage = () => {
               >
                 {isLoading ? (<CircularProgress size={24} color="bluez" />) : <div className="flex justify-center items-center gap-x-2.5">Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></div>}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Modal */}
+      {isOpen && (
+        <div
+          id="modalBackdrop"
+          onClick={handleOutsideClick}
+          className="fixed inset-0 bg-gray-900/40 bg-opacity-10 flex justify-center items-center"
+        >
+          <div className="relative bg-white rounded-xl p-6 max-w-lg w-full shadow-xl">
+            {/* Close button at top-left */}
+            <span
+              className="absolute top-4 right-4 text-4xl cursor-pointer bg-slate-400/30 hover:bg-slate-400/50 transition-all duration-300 ease-in-out rounded-full h-10 w-10 flex justify-center items-center"
+              onClick={closeModal}
+            >
+              &times;
+            </span>
+
+            {/* Modal Content */}
+            <div className="flex flex-col items-center">
+              <div className="mt-6">
+                <QRCode
+                  value={`https://getpietabsfrontend.vercel.app/general-info-form/1/Loan-Application`}
+                  size={200}
+                  fgColor="#4A90E2"
+                  bgColor="#F5F5F5"
+                />
+              </div>
+              <p className="mt-5 text-gray-700 text-center text-xl font-semibold">
+                Scan QR code & get the Flyer
+              </p>
             </div>
           </div>
         </div>

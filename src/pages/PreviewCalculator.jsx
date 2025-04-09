@@ -72,7 +72,7 @@ const PreviewCalculator = () => {
             <div className="flex flex-col items-center">
               <div className="mt-6">
                 <QRCode
-                  value={`https://getpietabsfrontend.vercel.app/preview-business-card/${cardId}`}
+                  value={`https://getpietabsfrontend.vercel.app/general-info-form/${cardId}/Calculator`}
                   size={200}
                   fgColor="#4A90E2"
                   bgColor="#F5F5F5"

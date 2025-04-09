@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import Swal from 'sweetalert2';
 
 const Tab7MainPage = () => {
 
   const { pictureId, tabName } = useParams();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     processor: '',
@@ -46,17 +48,25 @@ const Tab7MainPage = () => {
     }
   
     // Send the data
-    axiosInstance.post('/merchant-analysis', submitData)
-      .then((response) => {
-        setIsLoading(false);
-        alert("Form submitted successfully!");
-        // Handle response as needed
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.error("Error submitting form: ", error);
-        alert("There was an error submitting the form.");
+    axiosInstance.post('/finalForm', submitData)
+  .then((response) => {
+    setIsLoading(false);
+    if (response.status === 201 || response.status === 200) {
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: `Congratulations! Your card has been sent to your email: ${email}`,
       });
+      navigate("/");
+    } else {
+      throw new Error("Unexpected status code: " + response.status);
+    }
+  })
+  .catch((error) => {
+    setIsLoading(false);
+    console.error("Error submitting form: ", error.response || error.message || error);
+    alert("There was an error submitting the form.");
+  });
   
     if (
       formData.processor &&
