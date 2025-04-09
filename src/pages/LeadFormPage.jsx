@@ -6,7 +6,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 const LeadFormPage = () => {
 
   const navigate = useNavigate();
-
   const { pictureId, tabName } = useParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -54,6 +53,14 @@ const LeadFormPage = () => {
       payload.businessCardImageId = Number(pictureId);
     } else if (tabName === "Calculator") {
       payload.calculatorImageId = Number(pictureId);
+    } else if (tabName === "Charge-back-risk-analysis") {
+      payload.questionAnalysisId = Number(pictureId);
+    } else if (tabName === "Slice-of-the-market") {
+      payload.SliceOfTheMarketId = Number(pictureId);
+    } else if (tabName === "referral") {
+      payload.referralTabId = Number(pictureId);
+    } else if (tabName === "Loan-Application") {
+      payload.loanApplicationId = Number(pictureId);
     }
 
     try {
@@ -87,7 +94,6 @@ const LeadFormPage = () => {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div className='min-h-[calc(100vh-72px)] flex justify-center items-center bg-gradient-to-r from-[#DBEDFF] to-[#FFFFFF] py-8'>

@@ -116,12 +116,12 @@ const Tab5MainPage = () => {
     });
 
     try {
-      await axiosInstance.post('/loan', formPayload, {
+      const response = await axiosInstance.post('/loan', formPayload, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      navigate("/general-info-form/1/Loan-Application");
+      navigate(`/general-info-form/${response.data.id}/Loan-Application`);
     } catch (error) {
       console.error('Submission error:', error);
       alert('Submission failed. Please try again.');
@@ -345,7 +345,7 @@ const Tab5MainPage = () => {
             <div className="flex flex-col items-center">
               <div className="mt-6">
                 <QRCode
-                  value={`https://getpietabsfrontend.vercel.app/general-info-form/1/Loan-Application`}
+                  value={`https://getpietabsfrontend.vercel.app/loanFinancialAnalysis`}
                   size={200}
                   fgColor="#4A90E2"
                   bgColor="#F5F5F5"

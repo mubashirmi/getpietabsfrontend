@@ -115,13 +115,13 @@ const Tab3MainPage = () => {
           if (formData[key]) formDataToSend.append(key, formData[key]);
         });
 
-        await axiosInstance.post("/slice-of-the-market", formDataToSend, {
+        const response = await axiosInstance.post("/slice-of-the-market", formDataToSend, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
 
-        navigate("/general-info-form/1/Slice-of-the-market");
+        navigate(`/general-info-form/${response.data.id}/Slice-of-the-market`);
       } catch (error) {
         console.error("Error submitting data:", error);
       }
@@ -393,7 +393,7 @@ const Tab3MainPage = () => {
             <div className="flex flex-col items-center">
               <div className="mt-6">
                 <QRCode
-                  value={`https://getpietabsfrontend.vercel.app/general-info-form/1/Slice-of-the-market`}
+                  value={`https://getpietabsfrontend.vercel.app/sliceOfTheMarket`}
                   size={200}
                   fgColor="#4A90E2"
                   bgColor="#F5F5F5"

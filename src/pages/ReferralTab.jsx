@@ -1,8 +1,15 @@
 import { useState } from "react";
 import ReferralFormComponent from "../components/ReferralFormComponent";
 import axiosInstance from "../api/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import QRCode from "react-qr-code";
+import { BsQrCodeScan } from "react-icons/bs";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ReferralTab = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // State for showing loader
+  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState([
     {
       fieldName: "setup",
@@ -219,6 +226,14 @@ const ReferralTab = () => {
   // State to store the form input values
   const [formValues, setFormValues] = useState({});
 
+  // Functions to open & close modal
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+  const handleOutsideClick = (e) => {
+    if (e.target.id === 'modalBackdrop') {
+      closeModal();
+    }
+  };
   // Handler to update form values
   const handleInputChange = (fieldName, value) => {
     setFormValues((prevValues) => ({
@@ -230,17 +245,17 @@ const ReferralTab = () => {
   // Handler to submit the form data to the backend
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true)
     try {
       const response = await axiosInstance.post("/referralTab", formValues);
-
-      console.log("Form submitted successfully:", response.data);
-      alert("Form submitted successfully!");
+      navigate(`/general-info-form/${response.data.id}/referral`);
       // Optionally reset the form
       setFormValues({});
     } catch (error) {
       console.error("Error submitting form:", error.response?.data || error.message);
       alert("Error submitting form. Please try again.");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -265,15 +280,49 @@ const ReferralTab = () => {
             value={formValues[item.fieldName] || ""}
           />
         ))}
-        <div className="flex justify-center mt-5">
-          <button
-            type="submit"
-            className="bg-white text-[#0071E3] font-medium text-lg rounded-lg px-6 py-3 hover:bg-gray-100"
-          >
-            Submit
+        <div className="text-center mt-6 flex justify-center gap-3.5">
+          <button type="submit" className="border border-[#fff] text-[#fff] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out">
+            {loading ? (<CircularProgress size={24} color="white" />) : (
+              'Submit'
+            )}
           </button>
+          <button onClick={openModal} className='border border-[#fff] justify-center text-[#fff] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <BsQrCodeScan color="white" size={25} /></button>
+
         </div>
       </form>
+      {/* Modal */}
+      {isOpen && (
+        <div
+          id="modalBackdrop"
+          onClick={handleOutsideClick}
+          className="fixed inset-0 bg-gray-900/40 bg-opacity-10 flex justify-center items-center"
+        >
+          <div className="relative bg-white rounded-xl p-6 max-w-lg w-full shadow-xl">
+            {/* Close button at top-left */}
+            <span
+              className="absolute top-4 right-4 text-4xl cursor-pointer bg-slate-400/30 hover:bg-slate-400/50 transition-all duration-300 ease-in-out rounded-full h-10 w-10 flex justify-center items-center"
+              onClick={closeModal}
+            >
+              &times;
+            </span>
+
+            {/* Modal Content */}
+            <div className="flex flex-col items-center">
+              <div className="mt-6">
+                <QRCode
+                  value={`https://getpietabsfrontend.vercel.app/referralForm`}
+                  size={200}
+                  fgColor="#4A90E2"
+                  bgColor="#F5F5F5"
+                />
+              </div>
+              <p className="mt-5 text-gray-700 text-center text-xl font-semibold">
+                Scan QR code & get the Flyer
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
