@@ -170,7 +170,7 @@ const MeetingFormPage = () => {
                 className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
               />
             </div>
-            <button type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
+            <button disabled={isLoading} type="submit" className="bg-[#0071E3] cursor-pointer rounded-[10px] px-[30px] py-2.5 text-white w-full font-medium text-xl">
               {isLoading ? ( <CircularProgress size={24} color="white" /> ) : "Submit" }
             </button>
           </form>

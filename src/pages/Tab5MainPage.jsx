@@ -316,6 +316,7 @@ const Tab5MainPage = () => {
                 Schedule A Meeting
               </button>
               <button
+                disabled={isLoading}
                 onClick={submitForm}
                 className='border w-1/2 border-[#0071E3] text-[#0071E3] py-2.5 rounded-[10px] text-xl font-medium flex items-center justify-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'
               >

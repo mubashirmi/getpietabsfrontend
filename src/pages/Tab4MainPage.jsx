@@ -403,7 +403,7 @@ const Tab4MainPage = () => {
 
           {/* Submit Button */}
           <div className="text-center mt-6 flex justify-center gap-3.5">
-            <button type="submit" className="border border-[#fff] text-[#fff] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out">
+            <button disabled={loading} type="submit" className="border border-[#fff] text-[#fff] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out">
               {loading ? (<CircularProgress size={24} color="white" />) : (
                 'Submit Assessment'
               )}

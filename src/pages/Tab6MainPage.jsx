@@ -8,6 +8,7 @@ import { BsFacebook } from "react-icons/bs";
 import Modal from "react-modal";
 import domtoimage from 'dom-to-image';
 import { TbMailCheck, TbMailPause } from "react-icons/tb";
+import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from "react-router-dom";
 import Tab6MobileVersion from "./Tab6MobileVersion";
 import axiosInstance from "../api/axiosInstance";
@@ -18,6 +19,7 @@ const Tab6MainPage = () => {
   const [profileImage, setProfileImage] = useState({ file: null, url: "", name: "" });
   const [coverImage, setCoverImage] = useState({ file: null, url: "", name: "" });
   const [modalOpen, setModalOpen] = useState(false);
+  const [loading , setLoading] = useState(false);
   const [activeField, setActiveField] = useState(null);
   const [modalFieldData, setModalFieldData] = useState({});
   const [fields, setFields] = useState({
@@ -116,6 +118,7 @@ const Tab6MainPage = () => {
   };
 
   const handleCreateBusinessCard = async () => {
+    setLoading(true);
     try {
       const element = cardRef.current;
       if (!element) return;
@@ -140,6 +143,8 @@ const Tab6MainPage = () => {
   
     } catch (error) {
       console.error('Error capturing and sending image:', error);
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -408,7 +413,9 @@ const Tab6MainPage = () => {
               </div>
             </div>
             <div className='flex gap-x-3 mt-10'>
-            <button onClick={handleCreateBusinessCard} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>Get This Card</button>
+            <button disabled={loading} onClick={handleCreateBusinessCard} className='bg-[#0071E3] w-[200px] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200'>{loading ? (
+                            <CircularProgress size={24} color="white" />
+                          ) : "Get This Card"}</button>
             {/* <button onClick={() => navigate("/schedule-a-meeting/1/Business-Card")} className='border border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Schedule A Meeting <img className='w-[21px] h-[21px]' src="downnloadbtnicon.png" alt="" /></button> */}
           </div>
           </div>

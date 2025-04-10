@@ -15,10 +15,12 @@ import PreviewCalculator from './pages/PreviewCalculator'
 import Layout from './components/Layout'
 import ReferralTab from './pages/ReferralTab'
 import ReferralLandingPage from './pages/ReferralLandingPage'
+import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   return (
     <Layout>
+      <ScrollToTop />
       <Routes>
         <Route path='/' element={<Tab1MainPage />} />
         <Route path='/businesscard' element={<Tab6MainPage />} />

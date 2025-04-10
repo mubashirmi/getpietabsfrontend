@@ -225,7 +225,7 @@ const Tab7MainPage = () => {
                   className="text-lg border-[1px] font-medium border-[#D6D6D6] text-[#333] outline-none rounded-[10px] p-2.5"
                 />
               </div>
-              <button className='text-white w-full font-medium text-xl bg-[#0071E3] py-2.5 px-8 rounded-[10px] cursor-pointer  hover:shadow-blue-500/20 duration-300 transition-all ease-in-out hover:shadow-xl'>
+              <button disabled={isLoading} className='text-white w-full font-medium text-xl bg-[#0071E3] py-2.5 px-8 rounded-[10px] cursor-pointer  hover:shadow-blue-500/20 duration-300 transition-all ease-in-out hover:shadow-xl'>
                 {isLoading ? (<CircularProgress size={24} color="white" />) : "Next"}
               </button>
             </>

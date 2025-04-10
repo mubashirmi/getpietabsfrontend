@@ -297,8 +297,8 @@ const PiebackTabCalculator = () => {
                     </div>
                 </div>
                 <div className="mb-10 mt-6 flex gap-3 justify-center">
-                    <button onClick={()=>handleCreateBusinessCard("btn1")} className="bg-[#0071E3] min-w-72 py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200"> {isLoading ? ( <CircularProgress size={24} color="white" /> ) :"Get Your analysis"}</button>
-                    <button onClick={()=>handleCreateBusinessCard("btn2")} className='border min-w-72 justify-center border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>{isLoading2 ? ( <CircularProgress size={24} color="bluez" /> ) :<div className="flex justify-center items-center gap-x-2.5">Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></div>}</button>
+                    <button onClick={()=>handleCreateBusinessCard("btn1")} className="bg-[#0071E3] min-w-72 py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all hover:shadow-blue-500/30 hover:shadow-lg ease-in-out duration-200" disabled={isLoading}> {isLoading ? ( <CircularProgress size={24} color="white" /> ) :"Get Your analysis"}</button>
+                    <button onClick={()=>handleCreateBusinessCard("btn2")} className='border min-w-72 justify-center border-[#0071E3] text-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out' disabled={isLoading2}>{isLoading2 ? ( <CircularProgress size={24} color="bluez" /> ) :<div className="flex justify-center items-center gap-x-2.5">Download Analysis <img className='w-[22px] h-[22px]' src="downnloadbtnicon.png" alt="" /></div>}</button>
                 </div>
             </div>
             {/* Informational Last Section */}
