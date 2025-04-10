@@ -1,6 +1,6 @@
 const Loader = () => {
   return (
-    <div className='w-screen h-screen bg-[#f4f4f4] absolute top-0 left-0 flex justify-center items-center'>
+    <div className='w-[100vw] h-[100vh] bg-[#f4f4f4] absolute top-0 left-0 flex justify-center items-center'>
 <div className="blobs">
 	<div className="blob-center"></div>
 	<div className="blob"></div>
