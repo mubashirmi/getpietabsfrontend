@@ -143,7 +143,7 @@ const Tab3MainPage = () => {
             <p className="text-xl font-semibold text-[#DFDFDF] mb-5">
               Join Our Local Marketing Program, Slice of the Market! Pie Pay is offering a free local marketing program that helps generate leads for your business. We will be enrolling new businesses into the program before launch. Slice of the Market is a totally free way to network in your region and generate leads directly to your business. Slice of the Market - Get your Piece!
             </p>
-            <button onClick={openModal} className='border border-[#fff] text-[#fff] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out'>Scan <BsQrCodeScan color="white" size={25} /></button>
+            <button onClick={openModal} className='border hover:scale-110 border-[#fff] text-[#fff] py-2.5 px-[30px] rounded-[10px] text-xl font-medium flex items-center gap-1.5 cursor-pointer hover:shadow-white/25 hover:shadow-lg duration-500 transition-all ease-in-out'>Scan <BsQrCodeScan color="white" size={25} /></button>
 
           </div>
           <div className="w-[50%] bg-white px-10 py-12 h-full rounded-[25px] shadow-2xl shadow-black/10">
