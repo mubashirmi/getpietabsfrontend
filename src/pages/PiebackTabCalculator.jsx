@@ -107,7 +107,7 @@ const PiebackTabCalculator = () => {
     };
 
     return (
-        <div className="min-h-[100vh] bg-gradient-to-r from-[#4686BC] to-[#62956A] w-full flex flex-col justify-center items-center pt-20 pb-10">
+        <div className="min-h-[100vh] bg-gradient-to-r from-[#0071E3] to-[#002F5F] w-full flex flex-col justify-center items-center pt-20 pb-10">
             <div className="max-w-[1440px] bg-white w-[95%]  rounded-[25px] mx-auto">
                 <div className="w-full p-[30px] " ref={calculatorRef}>
                     <h3 className='text-[36px] font-bold text-center mb-7'> PIE BACK CALCULATOR</h3>

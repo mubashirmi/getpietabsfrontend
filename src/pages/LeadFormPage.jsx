@@ -101,7 +101,7 @@ const LeadFormPage = () => {
         <div className="w-[50%] min-h-full flex flex-col justify-center items-center">
           <h2 className="text-[32px] font-bold text-white">WELCOME TO</h2>
           <div className="flex my-4 justify-center items-center w-full">
-            <img src="/public/Logo.png" alt="logo getpie.io" className="w-[175px]" />
+            <img src="/Logo.png" alt="logo getpie.io" className="w-[175px]" />
           </div>
           <h2 className="text-[32px] font-bold text-white mb-4">GETPIE.IO</h2>
           <p className="text-center text-white font-medium text-2xl">Lorem . Esse illum ut veniam amet, quasi nisissimos. Soluta aut laborum repellat velit! Cum, voluptates mollitia facere obcaecati neque repellendus molestias ipsam ex eos, possimus reprehenderit optio provident! Recusandae quae distinctio odit magnam tempora, quibusdam et.</p>

@@ -131,7 +131,7 @@ const Tab5MainPage = () => {
   };
 
   return (
-    <div className="bg-gradient-to-l py-10 from-[#002F5F] to-[#0071E3] w-full min-h-[calc(100vh-72px)]">
+    <div className="bg-gradient-to-l py-10 from-[#002F5F] to-[#0071E3] w-full min-h-[calc(100vh-72px)] flex flex-col justify-center items-center">
       {step === 1 && (
         <div className="max-w-[1320px] flex justify-center items-center gap-x-5 rounded-[20px] bg-white shadow-2xl shadow-black/25 p-10 mx-auto">
           <div className="w-1/2 pl-2 pr-7">
@@ -326,6 +326,16 @@ const Tab5MainPage = () => {
           </div>
         </div>
       )}
+
+      {/* Informational Last Section */}
+      <div className='rounded-[20px] max-w-[1226px] mt-14 p-12 flex flex-col items-center gap-y-5 bg-gradient-to-r from-[#b7dafc] to-[#FFFFFF] shadow-xl shadow-black/15 mb-24'>
+        <h3 className='uppercase font-semibold text-4xl text-[#090909]'>Learn More About Our Business?</h3>
+        <p className='font-medium text-[24px] text-center'>
+          Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.
+        </p>
+        <button onClick={() => navigate(`/schedule-a-meeting/1/Loan-Application`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
+      </div>
+
       {/* Modal */}
       {isOpen && (
         <div

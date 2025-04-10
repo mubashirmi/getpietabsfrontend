@@ -62,7 +62,7 @@ const Tab4MainPage = () => {
     }
   };
 
-  
+
   const validateInitialForm = () => {
     const newErrors = {};
     if (!initialFormData.fullName.trim()) newErrors.fullName = 'Name is required';
@@ -141,10 +141,10 @@ const Tab4MainPage = () => {
 
     try {
       // Send data to the backend
-      await axiosInstance.post('/question-analysis', payload).then((response)=>{
+      await axiosInstance.post('/question-analysis', payload).then((response) => {
         navigate(`/general-info-form/${response.data.id}/Charge-back-risk-analysis`);
       })
-      
+
     } catch (error) {
       console.error('Error submitting data:', error);
       alert('An error occurred while submitting the data.');
@@ -154,7 +154,7 @@ const Tab4MainPage = () => {
   };
 
   return (
-    <div className='w-full pt-14 min-h-[calc(100vh-72px)] bg-gradient-to-r from-[#0071E3] to-[#002F5F]'>
+    <div className='w-full pt-14 min-h-[calc(100vh-72px)] bg-gradient-to-r from-[#0071E3] to-[#002F5F] flex flex-col justify-center items-center'>
       {step === 1 && (
         <div className="max-w-[1320px] flex justify-center items-center gap-x-5 rounded-[20px] bg-white shadow-2xl shadow-black/25 p-10  mx-auto">
           <div className="w-1/2 pl-2 pr-7">
@@ -206,7 +206,7 @@ const Tab4MainPage = () => {
           </div>
         </div>
       )}
-      {step === 2 &&(<div className="max-w-[750px] w-[99.5%] mx-auto p-4">
+      {step === 2 && (<div className="max-w-[800px] w-[99.5%] mx-auto p-4">
         <h1 className="text-[32px] text-white text-center font-bold mt-7 mb-3 uppercase">Chargeback Risk Assessment</h1>
         <p className='text-white text-xl font-medium'>Lorem ipsum morbi nisl nisi mauris mattis egestas non est convallis in fames pretium vitae cursus vestibulum urna volutpat suspendisse.</p>
         <form onSubmit={handleSubmit}>
@@ -437,7 +437,14 @@ const Tab4MainPage = () => {
           </div>
         )}
       </div>)}
-
+      {/* Informational Last Section */}
+      <div className='rounded-[20px] max-w-[1226px] mt-14 p-12 flex flex-col items-center gap-y-5 bg-gradient-to-r from-[#b7dafc] to-[#FFFFFF] shadow-xl shadow-black/15 mb-24'>
+        <h3 className='uppercase font-semibold text-4xl text-[#090909]'>Learn More About Our Business?</h3>
+        <p className='font-medium text-[24px] text-center'>
+          Lorem ipsum sed nisi turpis odio mattis pellentesque viverra semper blandit scelerisque sed diam lectus posuere urna morbi aliquet aenean.
+        </p>
+        <button onClick={() => navigate(`/schedule-a-meeting/1/Charge-back-risk-analysis`)} className='bg-[#0071E3] py-2.5 px-[30px] rounded-[10px] text-xl font-medium text-white cursor-pointer hover:bg-blue-600/90 transition-all ease-in-out duration-200 hover:shadow-blue-500/30 hover:shadow-lg'>Schedule A Meeting</button>
+      </div>
       {/* Modal */}
       {isOpen && (
         <div

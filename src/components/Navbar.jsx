@@ -37,15 +37,15 @@ const Navbar = () => {
           {/* Login and Signup Buttons */}
           <button
             onClick={() => navigate('/login')}
-            className="cursor-pointer rounded-[10px] text-[#0071E3] px-6 py-1.5 border-[1px] border-[#0071E3] ml-2"
+            className="cursor-pointer rounded-[10px] text-[#0071E3] hover:bg-[#0071E3] hover:text-white px-6 py-1.5 border-[1px] border-[#0071E3] ml-2 hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out"
           >
             Login
           </button>
           <button
             onClick={() => navigate('/signup')}
-            className="cursor-pointer rounded-[10px] px-6 py-1.5 text-white bg-[#0071E3] border-[1px] border-[#0071E3]"
+            className="cursor-pointer rounded-[10px] px-6 py-1.5 text-white hover:text-[#0071E3] bg-[#0071E3] hover:bg-white border-[1px] border-[#0071E3] hover:shadow-blue-500/20 hover:shadow-lg duration-300 transition-all ease-in-out"
           >
-            Signup
+            SignUp
           </button>
         </div>
 
@@ -211,7 +211,7 @@ const Navbar = () => {
                 d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
               />
             </svg>
-            <span className="font-medium text-[24px]">PieBack Calculator</span>
+            <span className="font-medium text-[24px]">PieBack Analysis</span>
           </button>
 
           <button
