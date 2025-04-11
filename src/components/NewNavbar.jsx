@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const NewNavbar = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -305,4 +305,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NewNavbar;
